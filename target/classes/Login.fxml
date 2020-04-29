@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -18,10 +19,10 @@
       </ImageView>
       <Button fx:id="loginButton" layoutX="387.0" layoutY="289.0" mnemonicParsing="false" text="Login" />
       <TextField fx:id="usernameTextField" layoutX="365.0" layoutY="91.0" prefHeight="25.0" prefWidth="89.0" />
-      <TextField fx:id="passwordTextField" layoutX="365.0" layoutY="157.0" prefHeight="25.0" prefWidth="89.0" />
-      <ChoiceBox fx:id="userChoiceBox" layoutX="365.0" layoutY="213.0" prefHeight="25.0" prefWidth="89.0" />
+      <ChoiceBox fx:id="userChoiceBox" layoutX="366.0" layoutY="213.0" prefHeight="25.0" prefWidth="89.0" />
       <Label fx:id="labelUsername" layoutX="298.0" layoutY="95.0" text="Username" />
       <Label fx:id="labelPassword" layoutX="300.0" layoutY="161.0" text="Password" />
+      <PasswordField fx:id="passwordTextField" layoutX="366.0" layoutY="157.0" prefHeight="25.0" prefWidth="89.0" />
 
    </children>
 </AnchorPane>

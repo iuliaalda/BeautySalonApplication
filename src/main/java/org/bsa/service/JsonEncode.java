@@ -29,13 +29,15 @@ public class JsonEncode extends UserService {
         users.add(u2);
         users.add(u3);
         users.add(u4);
-        Path USERS_PATH = FileSystemService.getPathToFile("config", "users.json");
+
+        Path USERS_PATH = FileSystemService.getPathToFile("config", "\\users.json");
 
 
         try{
             ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.writeValue(USERS_PATH.toFile(),users);
-            objectMapper.writerWithDefaultPrettyPrinter().writeValue(USERS_PATH.toFile(),users);
+            //objectMapper.writeValue(new File("C:\\Users\\aldai\\Desktop\\Project\\BSApplication\\src\\main\\resources\\users.json"),users);
+            objectMapper.writeValue(new File("src/main/resources/users.json"),users);
+            //objectMapper.writerWithDefaultPrettyPrinter().writeValue(USERS_PATH.toFile(),users);
         }catch (IOException e){e.printStackTrace();}
 
     }

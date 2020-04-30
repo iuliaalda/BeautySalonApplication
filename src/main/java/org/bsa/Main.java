@@ -11,14 +11,14 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.bsa.model.User;
+import org.bsa.service.JsonEncode;
 import org.bsa.service.UserService;
 
 
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
-
-       UserService.loadUsersFromFile();
+        //UserService.loadUsersFromFile();
         Parent root= FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
         Scene scene = new Scene(root, 600, 380);
 
@@ -26,6 +26,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
+
     }
 
     public static void main(String[] args) {

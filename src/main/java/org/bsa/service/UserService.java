@@ -11,8 +11,10 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,9 +22,10 @@ public class UserService {
     private static List<User> users;
     private static final Path USERS_PATH= FileSystemService.getPathToFile("config", "users.json");
 
+
     public static void loadUsersFromFile()throws IOException{
         if(!Files.exists(USERS_PATH)){
-            FileUtils.copyURLToFile(UserService.class.getClassLoader().getResource("users.json"), USERS_PATH.toFile());
+            FileUtils.copyURLToFile(User.class.getClassLoader().getResource("users.json"), USERS_PATH.toFile());
         }
         ObjectMapper objectMapper = new ObjectMapper();
         users = objectMapper.readValue(USERS_PATH.toFile(), new TypeReference<List<User>>() {
@@ -46,7 +49,7 @@ public class UserService {
         if(sw==0) throw new LoginFail();
     }
 
-    private static String encodePassword(String salt, String password) {
+    static String encodePassword(String salt, String password) {
         MessageDigest md = getMessageDigest();
         md.update(salt.getBytes(StandardCharsets.UTF_8));
 

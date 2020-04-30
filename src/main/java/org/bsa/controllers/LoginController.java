@@ -6,14 +6,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.bsa.service.UserService;
+import javafx.scene.control.TextField;
 
-import javax.jws.soap.SOAPBinding;
-import javax.xml.soap.Text;
+//import javax.jws.soap.SOAPBinding;
+//import javax.xml.soap.Text;
 
 public class LoginController {
     @FXML
@@ -25,8 +25,11 @@ public class LoginController {
     @FXML
     private ChoiceBox userChoiceBox;
     @FXML
-    private Text text;
+    private TextField text;
+    @FXML
+    private Label warningLogin;
     Stage stage;
+    UserService usr;
 
     @FXML
     public void initialize() {
@@ -36,21 +39,38 @@ public class LoginController {
     }
 
     public void handleLoginAction() {
-        try {
-            UserService.checkLoginCredentials(usernameTextField.getText(), passwordTextField.getText());
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Logn.fxml"));
-            stage = new Stage();
-            stage.setTitle("FXML Welcome");
-            stage.setScene(new Scene(root, 600, 400));
-            stage.setFullScreen(false);
-            stage.setResizable(false);
-            UserService.loadUsersFromFile();
-            stage.show();
-            text.setTextContent("Login successfully");
-        } catch (Exception e) {
-            text.setTextContent(e.getMessage());
+        String username = usernameTextField.getText();
+        String password = passwordTextField.getText();
+
+        //missing username
+        if(username==null || username.isEmpty())
+        {
+            warningLogin.setText("Please enter your username!");
+            return;
         }
 
+        //missing password
+        if(password==null || password.isEmpty())
+        {
+            warningLogin.setText("Please enter your password!");
+            return;
+        }
+
+        //log-in as customer
+        if(userChoiceBox.getValue()=="Customer")
+        {
+
+            //go to customer page
+            Scene customerScene;
+        }
+        //log-in as employee
+        if(userChoiceBox.getValue()=="Employee")
+        {
+            //go to employee page
+            Scene employeeScene;
+        }
+        //invalid login
+        warningLogin.setText("Invalid login!");
     }
 }
 

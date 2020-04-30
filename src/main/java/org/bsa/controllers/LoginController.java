@@ -35,23 +35,7 @@ public class LoginController {
 
     }
 
-    public void handleLoginAction() {
-        try {
-            UserService.checkLoginCredentials(usernameTextField.getText(), passwordTextField.getText());
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Logn.fxml"));
-            stage = new Stage();
-            stage.setTitle("FXML Welcome");
-            stage.setScene(new Scene(root, 600, 400));
-            stage.setFullScreen(false);
-            stage.setResizable(false);
-            UserService.loadUsersFromFile();
-            stage.show();
-            text.setTextContent("Login successfully");
-        } catch (Exception e) {
-            text.setTextContent(e.getMessage());
-        }
 
-    }
 }
 
 

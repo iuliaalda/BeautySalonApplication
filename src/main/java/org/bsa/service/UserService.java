@@ -5,8 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.FileUtils;
 import org.bsa.exceptions.EmptyFieldException;
 import org.bsa.exceptions.LoginFail;
+import org.bsa.exceptions.InvalidRole;
 import org.bsa.model.User;
 import org.apache.*;
+
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -20,22 +23,23 @@ import java.util.Objects;
 
 public class UserService {
     private static List<User> users;
-    private static final Path USERS_PATH= FileSystemService.getPathToFile("config", "users.json");
+    private static final Path USERS_PATH= FileSystemService.getPathToFile("config", "\\users.json");
 
 
     public static void loadUsersFromFile()throws IOException{
         if(!Files.exists(USERS_PATH)){
-            FileUtils.copyURLToFile(User.class.getClassLoader().getResource("users.json"), USERS_PATH.toFile());
+            FileUtils.copyURLToFile(User.class.getClassLoader().getResource("\\users.json"), new File("src/main/resources/users.json"));
         }
         ObjectMapper objectMapper = new ObjectMapper();
-        users = objectMapper.readValue(USERS_PATH.toFile(), new TypeReference<List<User>>() {
-        });
+        //objectMapper.readerWithView(USERS_PATH.getClass());
+        users=objectMapper.readValue(new File("src/main/resources/users.json"), new TypeReference<List<User>>() {});
+        //System.out.println("Read users"+users);
     }
 
     private static void checkEmptyField(String username, String password) throws EmptyFieldException {
         if(username.equals("") || password.equals("")) throw new EmptyFieldException();
     }
-    public static void checkLoginCredentials(String username,String password) throws LoginFail {
+    public static void checkLoginCredentials(String username,String password, String role) throws LoginFail, InvalidRole {
         String encodePassword=encodePassword(username, password);
         int sw=0;
         for (User user : users) {
@@ -43,7 +47,9 @@ public class UserService {
                 sw=1;
                 if (!Objects.equals(encodePassword, user.getPassword()))
                     throw new LoginFail();
-
+                else
+                    if(!Objects.equals(role, user.getRole()))
+                        throw new InvalidRole();
             }
         }
         if(sw==0) throw new LoginFail();

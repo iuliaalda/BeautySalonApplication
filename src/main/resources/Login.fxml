@@ -10,20 +10,20 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.bsa.controllers.LoginController">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bsa.controllers.LoginController">
    <children>
       <ImageView fx:id="loginImage" fitHeight="439.0" fitWidth="623.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Loginimage.png" />
          </image>
       </ImageView>
-      <Button fx:id="loginButton" layoutX="387.0" layoutY="289.0" mnemonicParsing="false" text="Login" />
+      <Button fx:id="loginButton" layoutX="387.0" layoutY="289.0" mnemonicParsing="false" onAction="#handleLoginAction" text="Login" />
       <TextField fx:id="usernameTextField" layoutX="365.0" layoutY="91.0" prefHeight="25.0" prefWidth="89.0" />
+      <PasswordField fx:id="passwordTextField" layoutX="366.0" layoutY="157.0" prefHeight="25.0" prefWidth="89.0" />
       <ChoiceBox fx:id="userChoiceBox" layoutX="366.0" layoutY="213.0" prefHeight="25.0" prefWidth="89.0" />
       <Label fx:id="labelUsername" layoutX="298.0" layoutY="95.0" text="Username" />
       <Label fx:id="labelPassword" layoutX="300.0" layoutY="161.0" text="Password" />
-      <PasswordField fx:id="passwordTextField" layoutX="366.0" layoutY="157.0" prefHeight="25.0" prefWidth="89.0" />
+      <Label fx:id="warningLogin" layoutX="70.0" layoutY="270.0" textFill="#ff0000cb" />
 
    </children>
 </AnchorPane>

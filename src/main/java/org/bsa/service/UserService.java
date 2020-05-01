@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.FileUtils;
 import org.bsa.exceptions.EmptyFieldException;
 import org.bsa.exceptions.LoginFail;
+import org.bsa.exceptions.InvalidRole;
 import org.bsa.model.User;
 import org.apache.*;
 
@@ -30,13 +31,15 @@ public class UserService {
             FileUtils.copyURLToFile(User.class.getClassLoader().getResource("\\users.json"), new File("src/main/resources/users.json"));
         }
         ObjectMapper objectMapper = new ObjectMapper();
-        users = objectMapper.readValue(new File("src/main/resources/users.json"), new TypeReference<List<User>>() {});
+        //objectMapper.readerWithView(USERS_PATH.getClass());
+        users=objectMapper.readValue(new File("src/main/resources/users.json"), new TypeReference<List<User>>() {});
+        //System.out.println("Read users"+users);
     }
 
     private static void checkEmptyField(String username, String password) throws EmptyFieldException {
         if(username.equals("") || password.equals("")) throw new EmptyFieldException();
     }
-    public static void checkLoginCredentials(String username,String password) throws LoginFail {
+    public static void checkLoginCredentials(String username,String password, String role) throws LoginFail, InvalidRole {
         String encodePassword=encodePassword(username, password);
         int sw=0;
         for (User user : users) {
@@ -44,7 +47,9 @@ public class UserService {
                 sw=1;
                 if (!Objects.equals(encodePassword, user.getPassword()))
                     throw new LoginFail();
-
+                else
+                    if(!Objects.equals(role, user.getRole()))
+                        throw new InvalidRole();
             }
         }
         if(sw==0) throw new LoginFail();

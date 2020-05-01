@@ -7,10 +7,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.bsa.exceptions.InvalidRole;
+import org.bsa.exceptions.LoginFail;
+import org.bsa.model.User;
 import org.bsa.service.UserService;
 import javafx.scene.control.TextField;
+
+import java.io.IOException;
+
+import static org.bsa.service.UserService.checkLoginCredentials;
 
 //import javax.jws.soap.SOAPBinding;
 //import javax.xml.soap.Text;
@@ -29,7 +37,8 @@ public class LoginController {
     @FXML
     private Label warningLogin;
     Stage stage;
-    UserService usr;
+
+    //private UserService U;
 
     @FXML
     public void initialize() {
@@ -38,10 +47,14 @@ public class LoginController {
 
     }
 
-    public void handleLoginAction() {
+    public void handleLoginAction() throws LoginFail, IOException, InvalidRole {
+        User usr= new User();
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
-
+        String role = (String) userChoiceBox.getValue();
+        usr.setUsername(username);
+        usr.setPassword(password);
+        usr.setRole(role);
         //missing username
         if(username==null || username.isEmpty())
         {
@@ -56,21 +69,45 @@ public class LoginController {
             return;
         }
 
-        //log-in as customer
-        if(userChoiceBox.getValue()=="Customer")
-        {
-
-            //go to customer page
-            Scene customerScene;
+        //check if correct credentials
+        try {
+            checkLoginCredentials(usr.getUsername(), usr.getPassword(),usr.getRole());
+        }catch (LoginFail e){
+            warningLogin.setText("Invalid login! Wrong credentials!");
+        }catch (InvalidRole e){
+            warningLogin.setText("Invalid login! Wrong role selected!");
         }
+
+        //log-in as customer
+        if(role=="Customer")
+        {
+            //go to customer page
+
+            try{
+                Stage stage = (Stage) warningLogin.getScene().getWindow();
+                Parent viewCustomerPageRoot = FXMLLoader.load(getClass().getResource("/CustomerPage.fxml"));
+                Scene customerScene=new Scene(viewCustomerPageRoot,600,380);
+                stage.setScene(customerScene);
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+            return;
+        }
+
         //log-in as employee
-        if(userChoiceBox.getValue()=="Employee")
+        if(role=="Employee")
         {
             //go to employee page
-            Scene employeeScene;
+            try{
+                Stage stage = (Stage) warningLogin.getScene().getWindow();
+                Parent viewEmployeePageRoot = FXMLLoader.load(getClass().getResource("/EmployeePage.fxml"));
+                Scene employeeScene=new Scene(viewEmployeePageRoot,600,380);
+                stage.setScene(employeeScene);
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+            return;
         }
-        //invalid login
-        warningLogin.setText("Invalid login!");
     }
 }
 

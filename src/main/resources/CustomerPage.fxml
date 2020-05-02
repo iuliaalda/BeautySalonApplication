@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -10,16 +11,25 @@
 
 <AnchorPane fx:id="customerPage" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bsa.controllers.CustomerPageController">
    <children>
-      <ImageView fx:id="loginImage" fitHeight="439.0" fitWidth="623.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="backImage" fitHeight="439.0" fitWidth="623.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@BSABackground.png" />
+            <Image url="@background.png" />
          </image>
       </ImageView>
-      <Label fx:id="welcomeCustomerLabel" layoutX="32.0" layoutY="35.0" text="Welcome to the customer page!" />
-      <Label fx:id="viewStaffLabel" layoutX="115.0" layoutY="96.0" text="In order to view our staff, press the button below:" />
-      <Button fx:id="viewStaffButton" layoutX="260.0" layoutY="135.0" mnemonicParsing="false" text="View Staff" />
+      <Label fx:id="welcomeCustomerLabel" layoutX="24.0" layoutY="27.0" text="Welcome to the customer page!" textFill="#d71a9b">
+         <font>
+            <Font name="Lucida Calligraphy Italic" size="20.0" />
+         </font></Label>
+      <Label fx:id="viewStaffLabel" layoutX="107.0" layoutY="96.0" text="In order to view our staff, press the button below:" textFill="#d71a9b">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font></Label>
+      <Button fx:id="viewStaffButton" layoutX="260.0" layoutY="135.0" mnemonicParsing="false" onAction="#handleViewStaffButton" text="View Staff" />
       <Button fx:id="viewServicesButton" layoutX="252.0" layoutY="249.0" mnemonicParsing="false" text="Services List" />
-      <Label fx:id="viewServicesLabel" layoutX="85.0" layoutY="197.0" text="In order to choose the services, press the button below:" />
+      <Label fx:id="viewServicesLabel" layoutX="86.0" layoutY="208.0" text="In order to choose the services, press the button below:" textFill="#d71a9b">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font></Label>
       <Button fx:id="myCartButton" layoutX="67.0" layoutY="347.0" mnemonicParsing="false" text="My Cart" />
       <Button fx:id="appointmentsButton" layoutX="457.0" layoutY="347.0" mnemonicParsing="false" text="Appointments" />
    </children>

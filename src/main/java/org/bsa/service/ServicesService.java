@@ -35,7 +35,7 @@ public class ServicesService {
     public static void loadServices() throws IOException{
         ServicesService.addServices();
         if(!Files.exists(S_PATH)){
-            FileUtils.copyURLToFile(Service.class.getClassLoader().getResource("\\services.json"), new File("src/main/resources/employees.json"));
+            FileUtils.copyURLToFile(Service.class.getClassLoader().getResource("\\services.json"), new File("src/main/resources/services.json"));
         }
         ObjectMapper objectMapper = new ObjectMapper();
         File file = new File("src/main/resources/services.json");

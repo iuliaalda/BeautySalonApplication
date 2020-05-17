@@ -17,7 +17,7 @@
                 <Image url="@background.png" />
             </image>
         </ImageView>
-      <TableView fx:id="employeeServices" layoutX="16.0" layoutY="56.0" prefHeight="288.0" prefWidth="569.0">
+      <TableView fx:id="employeeServices" layoutX="16.0" layoutY="56.0" prefHeight="282.0" prefWidth="569.0">
         <columns>
           <TableColumn fx:id="service" prefWidth="139.0" text="Service Type" />
           <TableColumn fx:id="price" prefWidth="111.0" text="Price" />
@@ -30,7 +30,7 @@
             <Font name="Lucida Calligraphy Italic" size="24.0" />
          </font>
       </Label>
-      <Button layoutX="219.0" layoutY="351.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="163.0" text="Add a Service" />
+      <Button layoutX="219.0" layoutY="344.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="163.0" text="Add a Service" />
 
     </children>
 

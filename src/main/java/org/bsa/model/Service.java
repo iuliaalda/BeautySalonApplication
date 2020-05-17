@@ -10,6 +10,7 @@ public class Service {
     Button editButton;
     Button deleteButton;
 
+    public Service(){}
     public Service(String type, float price) {
         this.type = type;
         this.price = price;

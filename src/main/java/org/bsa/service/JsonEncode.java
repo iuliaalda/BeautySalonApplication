@@ -21,7 +21,7 @@ public class JsonEncode extends UserService {
     public static void main(String argv[]) {
 
         ArrayList<User> users = new ArrayList<>();
-        User u1 = new User("iulia",encodePassword("Iulia", "abcde"), "Employee");
+        User u1 = new User("Iulia",encodePassword("Iulia", "abcde"), "Employee");
         User u2 = new User("Bia",encodePassword("Bia", "xyz"), "Employee");
         User u3 = new User("B",encodePassword("B", "bbb"), "Customer");
         User u4 = new User("A",encodePassword("A", "aaa"), "Customer");

@@ -72,42 +72,42 @@ public class LoginController {
         //check if correct credentials
         try {
             checkLoginCredentials(usr.getUsername(), usr.getPassword(),usr.getRole());
+            //log-in as customer
+            if(role=="Customer")
+            {
+                //go to customer page
+
+                try{
+                    Stage stage = (Stage) warningLogin.getScene().getWindow();
+                    Parent viewCustomerPageRoot = FXMLLoader.load(getClass().getResource("/CustomerPage.fxml"));
+                    Scene customerScene=new Scene(viewCustomerPageRoot,600,380);
+                    stage.setScene(customerScene);
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
+                return;
+            }
+
+            //log-in as employee
+            if(role=="Employee")
+            {
+                //go to employee page
+                try{
+                    Stage stage = (Stage) warningLogin.getScene().getWindow();
+                    Parent viewEmployeePageRoot = FXMLLoader.load(getClass().getResource("/EmployeePage.fxml"));
+                    Scene employeeScene=new Scene(viewEmployeePageRoot,600,380);
+                    stage.setScene(employeeScene);
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
+                return;
+            }
         }catch (LoginFail e){
             warningLogin.setText("Invalid login! Wrong credentials!");
         }catch (InvalidRole e){
             warningLogin.setText("Invalid login! Wrong role selected!");
         }
 
-        //log-in as customer
-        if(role=="Customer")
-        {
-            //go to customer page
-
-            try{
-                Stage stage = (Stage) warningLogin.getScene().getWindow();
-                Parent viewCustomerPageRoot = FXMLLoader.load(getClass().getResource("/CustomerPage.fxml"));
-                Scene customerScene=new Scene(viewCustomerPageRoot,600,380);
-                stage.setScene(customerScene);
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-            return;
-        }
-
-        //log-in as employee
-        if(role=="Employee")
-        {
-            //go to employee page
-            try{
-                Stage stage = (Stage) warningLogin.getScene().getWindow();
-                Parent viewEmployeePageRoot = FXMLLoader.load(getClass().getResource("/EmployeePage.fxml"));
-                Scene employeeScene=new Scene(viewEmployeePageRoot,600,380);
-                stage.setScene(employeeScene);
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-            return;
-        }
     }
 }
 

@@ -17,7 +17,14 @@
             <Image url="@background.png" />
         </image>
     </ImageView>
-      <TableView fx:id="tableStaff" layoutX="18.0" layoutY="76.0" prefHeight="309.0" prefWidth="564.0" />
+      <TableView fx:id="tableStaff" layoutX="18.0" layoutY="76.0" prefHeight="300.0" prefWidth="564.0">
+         <columns>
+            <TableColumn fx:id="fName" prefWidth="121.0" text="First Name" />
+            <TableColumn fx:id="lName" prefWidth="110.0" text="Last Name" />
+            <TableColumn fx:id="age" prefWidth="67.0" text="Age" />
+            <TableColumn fx:id="service" prefWidth="149.0" text="Service" />
+            <TableColumn fx:id="yrsExp" prefWidth="116.0" text="Experience (years)" />
+         </columns></TableView>
       <Label fx:id="ourEmplStaff" layoutX="191.0" layoutY="23.0" text="Our employees">
          <font>
             <Font name="Lucida Calligraphy Italic" size="28.0" />

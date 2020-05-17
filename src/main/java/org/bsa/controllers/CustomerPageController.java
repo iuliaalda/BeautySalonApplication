@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.bsa.service.EmployeeService;
 
 import java.io.IOException;
 
@@ -24,5 +25,6 @@ public class CustomerPageController {
         } catch (IOException e){
             e.printStackTrace();
         }
+        //EmployeeService.loadEmployees();
     }
 }

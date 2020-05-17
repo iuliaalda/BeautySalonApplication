@@ -2,15 +2,15 @@ package org.bsa.model;
 
 import java.util.Objects;
 
-public class Employee extends User {
+public class Employee extends User{
     private String firstName;
     private String lastName;
     private int age;
     private String serviceType;
     private int yearsExperience;
-
-    public Employee(String s, String employee, String firstName, String lastName, int age, String serviceType, int yearsExperience) {
-        super(s, employee);
+    public Employee(){super();}
+    public Employee(String username, String password,  String firstName, String lastName, int age, String serviceType, int yearsExperience) {
+        super(username, password, "Employee");
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;

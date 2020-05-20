@@ -62,6 +62,36 @@ public class EmployeeService {
         }catch (IOException exception){exception.printStackTrace();}
 
     }
+    public static void updateServiceinEmployee(String username,Service s,String newname,float newprice){
+        ObservableList<Employee> e;
+        e=returnEmp();
+        for(Employee employee:e){
+            if(employee.getUsername().equals(username))
+            {
+                employee.updateValue(s,newname,newprice);
+                ServicesService.updateServ(s,newname,newprice);
+            }
+        }
+        try{
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.writeValue(new File("src/main/resources/employees.json"),e);
+        }catch (IOException exception){exception.printStackTrace();}
+    }
+    public static void removeServicefromEmployee(String username, Service s){
+        ObservableList<Employee> e;
+        e=returnEmp();
+        for(Employee employee:e){
+            if(employee.getUsername().equals(username))
+            {
+                employee.removefromServiceList(s);
+                ServicesService.removeServ(s);
+            }
+        }
+        try{
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.writeValue(new File("src/main/resources/employees.json"),e);
+        }catch (IOException exception){exception.printStackTrace();}
+    }
     public static void loadEmployees()throws IOException{
         if(!Files.exists(EMP_PATH)){
             FileUtils.copyURLToFile(User.class.getClassLoader().getResource("\\employees.json"), new File("src/main/resources/employees.json"));
@@ -69,7 +99,7 @@ public class EmployeeService {
         ObjectMapper objectMapper = new ObjectMapper();
         File file = new File("src/main/resources/employees.json");
         employees=objectMapper.readValue(file, new TypeReference<List<Employee>>() {});
-        System.out.println(employees);
+
     }
     public static ObservableList<Employee> returnEmp(){
         ObservableList<Employee> aux= FXCollections.observableArrayList();

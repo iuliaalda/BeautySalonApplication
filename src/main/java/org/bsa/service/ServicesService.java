@@ -69,6 +69,35 @@ public class ServicesService {
             e.printStackTrace();
         }
     }
+    public static void updateServ(Service s,String name,float price){
+        ObservableList<Service> service;
+        service=returnServ();
+        for(Service aux:service){
+            if(aux.equals(s)){
+                aux.setType(name);
+                aux.setPrice(price);
+            }
+        }
+        try{
+            ObjectMapper objectMapper = new ObjectMapper();
+            File file = new File("src/main/resources/services.json");
+            objectMapper.writeValue(file,service);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    public static void removeServ(Service s){
+        ObservableList<Service> service;
+        service=returnServ();
+        service.removeIf(serv->serv.equals(s));
+        try{
+            ObjectMapper objectMapper = new ObjectMapper();
+            File file = new File("src/main/resources/services.json");
+            objectMapper.writeValue(file,service);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
     public void setUsr(String s){usr=s;}
     public String getUsr(){return usr;}
     public static ObservableList<Service> returnCertainServ(){

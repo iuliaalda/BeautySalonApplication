@@ -2,10 +2,14 @@ package org.bsa.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.converter.FloatStringConverter;
 import org.bsa.model.Employee;
@@ -65,6 +69,7 @@ public class EmployeeServicesListController {
         employeeServices.setItems(aux);
     }
     private void initCol(){
+        ServicesService ss=new ServicesService();
         service.setCellValueFactory(new PropertyValueFactory<>("type"));
         price.setCellValueFactory(new PropertyValueFactory<>("price"));
         edit.setCellValueFactory(new PropertyValueFactory<>("edit"));
@@ -87,7 +92,27 @@ public class EmployeeServicesListController {
                                 else{
                                     b.setOnAction(event -> {
                                         //editing the row
+                                        Service s=getTableView().getItems().get(getIndex());
+                                        String ename=new String(); float eprice=0;
+                                        try{
+                                            Stage stage = new Stage();
+                                            FXMLLoader loader=new FXMLLoader(getClass().getResource("/EmployeeEditingPage.fxml"));
+                                            Parent vieweditingPageRoot = loader.load();
+                                            Scene editingScene=new Scene(vieweditingPageRoot,300,300);
+                                            stage.setScene(editingScene);
+                                            stage.showAndWait();
+                                            ename=loader.<EmployeeEditingController>getController().getNewName();
+                                            eprice=loader.<EmployeeEditingController>getController().getNewPrice();
+                                        } catch (IOException e){
+                                            e.printStackTrace();
+                                        }
+                                        //Service editedService=new Service(ename,eprice,ss.getUsr());
 
+                                        if(ename==null)
+                                            ename=s.getType();
+                                        if(eprice==0.0)
+                                            eprice=s.getPrice();
+                                        EmployeeService.updateServiceinEmployee(ss.getUsr(),s,ename,eprice);
                                     });
                                     setGraphic(b);
                                     setText(null);
@@ -116,7 +141,8 @@ public class EmployeeServicesListController {
                                 else{
                                     b2.setOnAction(event -> {
                                         //deleting the row
-                                        System.out.println("Deleted the item");
+                                        Service s=getTableView().getItems().get(getIndex());
+                                        EmployeeService.removeServicefromEmployee(ss.getUsr(),s);
                                     });
                                     setGraphic(b2);
                                     setText(null);

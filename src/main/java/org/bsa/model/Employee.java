@@ -88,6 +88,17 @@ public class Employee extends User{
     public void addtoServiceList(Service s){
         listServices.add(s);
     }
+    public void removefromServiceList(Service s){
+        listServices.removeIf(service -> service.equals(s));
+    }
+    public void updateValue(Service s,String name,float price){
+        for(Service service:listServices){
+            if(service.equals(s)){
+                service.setType(name);
+                service.setPrice(price);
+            }
+        }
+    }
 
     @Override
     public String toString() {

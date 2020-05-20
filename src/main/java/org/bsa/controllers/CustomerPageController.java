@@ -27,4 +27,15 @@ public class CustomerPageController {
         }
         //EmployeeService.loadEmployees();
     }
+    public void handleViewServices(){
+        try{
+            Scene listScene;
+            Stage stage = (Stage) welcomeCustomerLabel.getScene().getWindow();
+            Parent viewStaffListPageRoot = FXMLLoader.load(getClass().getResource("/CustomerServicesList.fxml"));
+            listScene= new Scene(viewStaffListPageRoot,600,380);
+            stage.setScene(listScene);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 }

@@ -2,19 +2,18 @@ package org.bsa.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 import javafx.util.converter.FloatStringConverter;
+import org.bsa.model.Employee;
 import org.bsa.model.Service;
+import org.bsa.service.EmployeeService;
 import org.bsa.service.ServicesService;
 
-import java.awt.*;
+
 import java.io.IOException;
 
 public class EmployeeServicesListController {
@@ -29,20 +28,48 @@ public class EmployeeServicesListController {
     private TableColumn price;
     @FXML
     private TableColumn delete;
+    @FXML
+    private Button addBttn;
+    @FXML
+    private TextField serviceAddText;
+    @FXML
+    private TextField priceAddText;
+
+    public void handleAddAction(){
+        Service service=new Service();
+        ServicesService ss=new ServicesService();
+        service.setType(serviceAddText.getText());
+        service.setPrice(Float.parseFloat(priceAddText.getText()));
+        service.setEmpl(ss.getUsr());
+        //add to database
+        Employee e;
+        //e=EmployeeService.findEmployee(ss.getUsr());
+        /*e.addtoServiceList(service);
+        System.out.println(e.toString());*/
+        EmployeeService.writeServicetoEmployee(ss.getUsr(),service);
+
+        //clear inputs
+        serviceAddText.clear();
+        priceAddText.clear();
+    }
 
     public void initialize() throws IOException {
+        EmployeeService.loadEmployees();
         ServicesService.loadServices();
         initTable();
     }
     private void initTable(){
         initCol();
-        loadServices();
+        ObservableList<Service> aux=FXCollections.observableArrayList();
+        aux=ServicesService.returnCertainServ();
+        employeeServices.setItems(aux);
     }
     private void initCol(){
         service.setCellValueFactory(new PropertyValueFactory<>("type"));
         price.setCellValueFactory(new PropertyValueFactory<>("price"));
         edit.setCellValueFactory(new PropertyValueFactory<>("edit"));
         delete.setCellValueFactory(new PropertyValueFactory<>("delete"));
+        //handling edit button action
         Callback<TableColumn<Service,String>, TableCell<Service,String>> cellFactory =
                 new Callback<TableColumn<Service, String>, TableCell<Service, String>>() {
                     @Override
@@ -59,8 +86,8 @@ public class EmployeeServicesListController {
                                 }
                                 else{
                                     b.setOnAction(event -> {
-                                        Service service = getTableView().getItems().get(getIndex());
-                                        System.out.println(service.getType()+" "+service.getPrice());
+                                        //editing the row
+
                                     });
                                     setGraphic(b);
                                     setText(null);
@@ -71,7 +98,35 @@ public class EmployeeServicesListController {
                     }
                 };
         edit.setCellFactory(cellFactory);
-        //editCol();
+        //the delete button now
+        Callback<TableColumn<Service,String>, TableCell<Service,String>> cellFactoryDelete =
+                new Callback<TableColumn<Service, String>, TableCell<Service, String>>() {
+                    @Override
+                    public TableCell<Service, String> call(final TableColumn<Service, String> param) {
+                        final TableCell<Service,String> cell = new TableCell<Service,String>(){
+                            final Button b2=new Button("Delete");
+
+                            @Override
+                            protected void updateItem(String item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if(empty){
+                                    setGraphic(null);
+                                    setText(null);
+                                }
+                                else{
+                                    b2.setOnAction(event -> {
+                                        //deleting the row
+                                        System.out.println("Deleted the item");
+                                    });
+                                    setGraphic(b2);
+                                    setText(null);
+                                }
+                            }
+                        };
+                        return cell;
+                    }
+                };
+        delete.setCellFactory(cellFactoryDelete);
     }
     /*private void editCol(){
         service.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -86,11 +141,4 @@ public class EmployeeServicesListController {
         employeeServices.setEditable(true);
     }*/
 
-    private void loadServices(){
-        //from json file, maybe call method from services service class
-        ObservableList<Service> services= FXCollections.observableArrayList();
-        services.add(new Service("Makeup",50));
-        services.add(new Service("Hairstyle",40));
-        employeeServices.setItems(services);
-    }
 }

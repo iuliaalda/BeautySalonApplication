@@ -1,5 +1,6 @@
 package org.bsa.model;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Employee extends User{
@@ -8,31 +9,36 @@ public class Employee extends User{
     private int age;
     private String serviceType;
     private int yearsExperience;
+    private ArrayList<Service> listServices;
     public Employee(){super();}
-    public Employee(String username, String password,  String firstName, String lastName, int age, String serviceType, int yearsExperience) {
+
+    public Employee(String username, String password,  String firstName, String lastName, int age, String serviceType, int yearsExperience, ArrayList<Service> listServices) {
         super(username, password, "Employee");
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.serviceType = serviceType;
         this.yearsExperience = yearsExperience;
+        this.listServices=listServices;
     }
 
-    public Employee(String firstName, String lastName, int age, String serviceType, int yearsExperience) {
+    public Employee(String firstName, String lastName, int age, String serviceType, int yearsExperience, ArrayList<Service> listServices) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.serviceType = serviceType;
         this.yearsExperience = yearsExperience;
+        this.listServices=listServices;
     }
 
-    public Employee(String username, String password, String role, String firstName, String lastName, int age, String serviceType, int yearsExperience) {
+    public Employee(String username, String password, String role, String firstName, String lastName, int age, String serviceType, int yearsExperience, ArrayList<Service> listServices) {
         super(username, password, role);
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.serviceType = serviceType;
         this.yearsExperience = yearsExperience;
+        this.listServices=listServices;
     }
 
     public String getFirstName() {
@@ -75,6 +81,14 @@ public class Employee extends User{
         this.yearsExperience = yearsExperience;
     }
 
+    public ArrayList<Service> getListServices() { return listServices; }
+
+    public void setListServices(ArrayList<Service> listServices) { this.listServices = listServices; }
+
+    public void addtoServiceList(Service s){
+        listServices.add(s);
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -82,7 +96,8 @@ public class Employee extends User{
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
                 ", serviceType='" + serviceType + '\'' +
-                ", yearsExperience='" + yearsExperience + '\'' +
+                ", yearsExperience=" + yearsExperience +
+                ", listServices=" + listServices +
                 '}';
     }
 
@@ -93,14 +108,15 @@ public class Employee extends User{
         if (!super.equals(o)) return false;
         Employee employee = (Employee) o;
         return age == employee.age &&
+                yearsExperience == employee.yearsExperience &&
                 firstName.equals(employee.firstName) &&
                 lastName.equals(employee.lastName) &&
                 serviceType.equals(employee.serviceType) &&
-                yearsExperience == employee.yearsExperience;
+                listServices.equals(employee.listServices);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), firstName, lastName, age, serviceType, yearsExperience);
+        return Objects.hash(super.hashCode(), firstName, lastName, age, serviceType, yearsExperience, listServices);
     }
 }

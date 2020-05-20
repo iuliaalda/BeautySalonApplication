@@ -7,13 +7,37 @@ import java.util.Objects;
 public class Service {
     private String type;
     private float price;
-    Button editButton;
-    Button deleteButton;
+    private String empl;
 
     public Service(){}
-    public Service(String type, float price) {
+    public Service(String type, float price,String empl) {
         this.type = type;
         this.price = price;
+        this.empl=empl;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public String getEmpl() {
+        return empl;
+    }
+
+    public void setEmpl(String empl) {
+        this.empl = empl;
     }
 
     @Override
@@ -22,28 +46,13 @@ public class Service {
         if (!(o instanceof Service)) return false;
         Service service = (Service) o;
         return Float.compare(service.price, price) == 0 &&
-                type.equals(service.type);
+                type.equals(service.type) &&
+                empl.equals(service.empl);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, price);
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public float getPrice() {
-        return price;
+        return Objects.hash(type, price, empl);
     }
 
     @Override
@@ -51,6 +60,7 @@ public class Service {
         return "Service{" +
                 "type='" + type + '\'' +
                 ", price=" + price +
+                ", empl='" + empl + '\'' +
                 '}';
     }
 }

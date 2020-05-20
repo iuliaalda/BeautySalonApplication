@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bsa.controllers.EmployeeEditingController">
+   <children>
+      <TextField fx:id="nameField" layoutX="35.0" layoutY="77.0" promptText="Service Name" />
+      <TextField fx:id="priceField" layoutX="33.0" layoutY="158.0" promptText="Service Price" />
+      <Label layoutX="35.0" layoutY="50.0" text="Enter the new name:" />
+      <Label layoutX="33.0" layoutY="123.0" text="Enter the new price:" />
+      <Button fx:id="confirmButton" layoutX="83.0" layoutY="236.0" mnemonicParsing="false" onAction="#handleConfirmButton" text="Confirm" />
+      <Label layoutX="20.0" layoutY="14.0" text="You can edit either one or both!" />
+      <Label fx:id="wrongPriceLabel" layoutX="94.0" layoutY="209.0" textFill="RED" />
+   </children>
+</AnchorPane>

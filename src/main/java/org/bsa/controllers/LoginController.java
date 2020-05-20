@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 import org.bsa.exceptions.InvalidRole;
 import org.bsa.exceptions.LoginFail;
 import org.bsa.model.User;
+import org.bsa.service.EmployeeService;
+import org.bsa.service.ServicesService;
 import org.bsa.service.UserService;
 import javafx.scene.control.TextField;
 
@@ -37,15 +39,18 @@ public class LoginController {
     @FXML
     private Label warningLogin;
     Stage stage;
-
+    private String u;
     //private UserService U;
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException{
+        //EmployeeService.writeEmployees();
+        //ServicesService.addServices();
         userChoiceBox.getItems().addAll("Employee", "Customer");
         userChoiceBox.setValue("Customer");
 
     }
+
 
     public void handleLoginAction() throws LoginFail, IOException, InvalidRole {
         User usr= new User();
@@ -92,6 +97,8 @@ public class LoginController {
             if(role=="Employee")
             {
                 //go to employee page
+                ServicesService ss=new ServicesService();
+                ss.setUsr(usr.getUsername());
                 try{
                     Stage stage = (Stage) warningLogin.getScene().getWindow();
                     Parent viewEmployeePageRoot = FXMLLoader.load(getClass().getResource("/EmployeePage.fxml"));

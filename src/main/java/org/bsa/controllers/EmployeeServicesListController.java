@@ -3,12 +3,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.converter.FloatStringConverter;
@@ -42,15 +46,46 @@ public class EmployeeServicesListController {
     public void handleAddAction(){
         Service service=new Service();
         ServicesService ss=new ServicesService();
-        service.setType(serviceAddText.getText());
-        service.setPrice(Float.parseFloat(priceAddText.getText()));
-        service.setEmpl(ss.getUsr());
-        //add to database
-        Employee e;
-        //e=EmployeeService.findEmployee(ss.getUsr());
-        /*e.addtoServiceList(service);
-        System.out.println(e.toString());*/
-        EmployeeService.writeServicetoEmployee(ss.getUsr(),service);
+        if((!serviceAddText.getText().isEmpty()) && (!priceAddText.getText().isEmpty())){
+            service.setType(serviceAddText.getText());
+            try{
+                Float.parseFloat(priceAddText.getText());
+                service.setPrice(Float.parseFloat(priceAddText.getText()));
+                service.setEmpl(ss.getUsr());
+                //add to database
+                EmployeeService.writeServicetoEmployee(ss.getUsr(),service);
+            }catch (NumberFormatException exception) {
+                Stage alert = new Stage();
+                alert.initModality(Modality.APPLICATION_MODAL);
+                VBox alertscene = new VBox(20);
+                alertscene.setMinSize(200,100);
+                Label aLabel = new Label();
+                aLabel.setText("The price field is not a number!");
+                Button closeB = new Button("Close");
+                closeB.setOnAction(e -> alert.close());
+                alertscene.getChildren().addAll(aLabel, closeB);
+                alertscene.setAlignment(Pos.CENTER);
+                Scene scene = new Scene(alertscene);
+                alert.setScene(scene);
+                alert.show();
+            }
+        }
+        else
+        {
+            Stage alert = new Stage();
+            alert.initModality(Modality.APPLICATION_MODAL);
+            VBox alertscene = new VBox(20);
+            alertscene.setMinSize(200,100);
+            Label aLabel=new Label();
+            aLabel.setText("Please fill all the fields!");
+            Button closeB=new Button("Close");
+            closeB.setOnAction(e->alert.close());
+            alertscene.getChildren().addAll(aLabel,closeB);
+            alertscene.setAlignment(Pos.CENTER);
+            Scene scene = new Scene(alertscene);
+            alert.setScene(scene);
+            alert.show();
+        }
 
         //clear inputs
         serviceAddText.clear();

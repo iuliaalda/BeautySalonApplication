@@ -33,11 +33,12 @@
       </Label>
       <HBox layoutX="1.0" layoutY="338.0" prefHeight="37.0" prefWidth="600.0" spacing="10">
          <children>
-            <TextField fx:id="serviceAddText" prefHeight="39.0" prefWidth="153.0" promptText="Service Type"/>
+            <TextField fx:id="serviceAddText" prefHeight="39.0" prefWidth="153.0" promptText="Service Type" />
             <TextField fx:id="priceAddText" prefHeight="39.0" prefWidth="130.0" promptText="Price" />
             <Button fx:id="addBttn" mnemonicParsing="false" onAction="#handleAddAction" prefHeight="37.0" prefWidth="163.0" text="Add a Service" />
          </children>
       </HBox>
+      <Button fx:id="backButton" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" text="Back" onAction="#handleBackButton" />
 
     </children>
 

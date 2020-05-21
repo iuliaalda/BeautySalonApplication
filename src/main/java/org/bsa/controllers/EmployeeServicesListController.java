@@ -201,5 +201,16 @@ public class EmployeeServicesListController {
 
         employeeServices.setEditable(true);
     }*/
+    @FXML
+    void handleBackButton(){
+        try{
+            Stage stage = (Stage) addBttn.getScene().getWindow();
+            Parent viewEmployeePageRoot = FXMLLoader.load(getClass().getResource("/EmployeePage.fxml"));
+            Scene employeeScene=new Scene(viewEmployeePageRoot,600,380);
+            stage.setScene(employeeScene);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 
 }

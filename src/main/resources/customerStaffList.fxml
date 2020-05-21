@@ -29,5 +29,6 @@
          <font>
             <Font name="Lucida Calligraphy Italic" size="28.0" />
          </font></Label>
+      <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Back" onAction="#handleBackButton" />
     </children>
 </AnchorPane>

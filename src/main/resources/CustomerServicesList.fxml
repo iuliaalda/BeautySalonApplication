@@ -17,20 +17,25 @@
                 <Image url="@background.png" />
             </image>
         </ImageView>
-      <TableView layoutX="48.0" layoutY="76.0" prefHeight="271.0" prefWidth="491.0">
+      <TableView fx:id="custServTable" layoutX="48.0" layoutY="76.0" prefHeight="271.0" prefWidth="491.0">
         <columns>
-          <TableColumn prefWidth="188.0" text="Service Name" />
-          <TableColumn prefWidth="96.0" text="Price" />
-            <TableColumn prefWidth="110.0" text="The Staff" />
-            <TableColumn prefWidth="95.0" resizable="false" sortable="false" text="Choose it!" />
+          <TableColumn fx:id="nameColumn" prefWidth="279.0" text="Service Name" />
+          <TableColumn fx:id="priceColumn" prefWidth="106.0" text="Price" />
+            <TableColumn fx:id="checkboxColumn" prefWidth="105.0" resizable="false" sortable="false" text="Choose it!" />
         </columns>
       </TableView>
-      <Label layoutX="40.0" layoutY="27.0" text="Check the services you would like to purchase!">
+      <Label layoutX="44.0" layoutY="14.0" text="Check the services you would like to purchase! ">
          <font>
-            <Font name="Lucida Calligraphy Italic" size="22.0" />
+            <Font name="Lucida Calligraphy Italic" size="20.0" />
          </font>
       </Label>
-      <Button layoutX="255.0" layoutY="350.0" mnemonicParsing="false" text="Done!" />
+      <Button fx:id="doneButton" layoutX="255.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleDoneButton" text="Done!" />
+      <Label layoutX="32.0" layoutY="46.0" text="And double-click the ones you wish to know more about!">
+         <font>
+            <Font name="Lucida Calligraphy Italic" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="backButton" layoutX="14.0" layoutY="350.0" mnemonicParsing="false" text="Back" onAction="#handleBackButton" />
     </children>
 
 </AnchorPane>

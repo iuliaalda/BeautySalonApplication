@@ -5,6 +5,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -41,6 +44,8 @@ public class CustomerStaffListController {
     TableColumn<Employee,String> service;
     @FXML
     TableColumn<Employee,String> yrsExp;
+    @FXML
+    Button backButton;
     public void initialize() throws IOException{
         //ObservableList<Employee> list = FXCollections.observableArrayList();
         EmployeeService.loadEmployees();
@@ -62,4 +67,15 @@ public class CustomerStaffListController {
         return emp;
     }
     */
+    @FXML
+    void handleBackButton(){
+        try{
+            Stage stage = (Stage) tableStaff.getScene().getWindow();
+            Parent viewCustomerPageRoot = FXMLLoader.load(getClass().getResource("/CustomerPage.fxml"));
+            Scene customerScene=new Scene(viewCustomerPageRoot,600,380);
+            stage.setScene(customerScene);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 }

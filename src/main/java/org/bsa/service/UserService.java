@@ -23,12 +23,12 @@ import java.util.Objects;
 
 public class UserService {
     private static List<User> users;
-    private static final Path USERS_PATH= FileSystemService.getPathToFile("config", "\\users.json");
+    private static final Path USERS_PATH= FileSystemService.getPathToFile("config", "users.json");
 
 
     public static void loadUsersFromFile()throws IOException{
         if(!Files.exists(USERS_PATH)){
-            FileUtils.copyURLToFile(User.class.getClassLoader().getResource("\\users.json"), new File("src/main/resources/users.json"));
+            FileUtils.copyURLToFile(UserService.class.getClassLoader().getResource("users.json"), new File("src/main/resources/users.json"));
         }
         ObjectMapper objectMapper = new ObjectMapper();
         //objectMapper.readerWithView(USERS_PATH.getClass());

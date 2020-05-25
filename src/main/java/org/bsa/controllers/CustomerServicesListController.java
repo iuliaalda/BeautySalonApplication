@@ -1,6 +1,8 @@
 package org.bsa.controllers;
 
-import com.sun.javaws.IconUtil;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -14,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -23,8 +26,8 @@ import org.bsa.model.Service;
 import org.bsa.service.EmployeeService;
 import org.bsa.service.ServicesService;
 
-import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class CustomerServicesListController {
     @FXML
@@ -41,6 +44,8 @@ public class CustomerServicesListController {
 
     @FXML
     private Button doneButton;
+    private static ArrayList<Service> selected;
+
     public void initialize()throws IOException {
         EmployeeService.loadEmployees();
         ServicesService.loadServices();
@@ -87,9 +92,9 @@ public class CustomerServicesListController {
         });
     }
     public void initCols(){
+        ObservableList<Service> selected= FXCollections.observableArrayList();
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-
         checkboxColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures, ObservableValue>() {
             @Override
             public ObservableValue call(TableColumn.CellDataFeatures param) {
@@ -97,8 +102,6 @@ public class CustomerServicesListController {
                 return new SimpleObjectProperty<CheckBox>(check);
             }
         });
-
-        //checkboxColumn.setCellFactory(cellFactory);
         checkboxColumn.setEditable(true);
     }
 
@@ -115,7 +118,40 @@ public class CustomerServicesListController {
     }
     @FXML
     void handleDoneButton(){
-        System.out.println("Pressed");
+        //link checkboxes with done button
+        //go back or to cart
+        Stage box = new Stage();
+        box.initModality(Modality.APPLICATION_MODAL);
+        VBox alertscene = new VBox(20);
+        alertscene.setMinSize(200,100);
+        Label aLabel=new Label();
+        aLabel.setText("Choose one:");
+        HBox hb=new HBox();
+        hb.setSpacing(10);
+        hb.setAlignment(Pos.CENTER);
+        Button closeB=new Button("Go Back");
+        closeB.setOnAction(e->{
+            box.close();
+            try{
+                Stage stage = (Stage) doneButton.getScene().getWindow();
+                Parent viewCustomerPageRoot = FXMLLoader.load(getClass().getResource("/CustomerPage.fxml"));
+                Scene customerScene=new Scene(viewCustomerPageRoot,600,380);
+                stage.setScene(customerScene);
+            } catch (IOException ex){
+                ex.printStackTrace();
+            }
+        });
+        Button cartB=new Button("Go to My Cart");
+        cartB.setOnAction(e->{
+            box.close();
+            //link to my cart page
+        });
+        hb.getChildren().addAll(cartB,closeB);
+        alertscene.getChildren().addAll(aLabel,hb);
+        alertscene.setAlignment(Pos.CENTER);
+        Scene scene = new Scene(alertscene);
+        box.setScene(scene);
+        box.show();
     }
 
 }

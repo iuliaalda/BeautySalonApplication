@@ -38,4 +38,14 @@ public class CustomerPageController {
             e.printStackTrace();
         }
     }
+    public void handleCartAction(){
+        try{
+            Stage stage = (Stage) welcomeCustomerLabel.getScene().getWindow();
+            Parent viewCustomerPageRoot = FXMLLoader.load(getClass().getResource("/Customer_Cart.fxml"));
+            Scene customerScene=new Scene(viewCustomerPageRoot,600,380);
+            stage.setScene(customerScene);
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+    }
 }

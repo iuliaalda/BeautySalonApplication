@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bsa.controllers.CustomerCartController">
+    <children>
+    <ImageView fx:id="backImage" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@background_design.png" />
+        </image>
+    </ImageView>
+      <TableView layoutX="46.0" layoutY="63.0" prefHeight="274.0" prefWidth="508.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <Button fx:id="backButton" layoutX="16.0" layoutY="340.0" mnemonicParsing="false" onAction="#handleBackButton" text="Back" />
+    </children>
+</AnchorPane>

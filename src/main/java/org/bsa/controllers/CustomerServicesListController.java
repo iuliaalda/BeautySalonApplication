@@ -1,6 +1,7 @@
 package org.bsa.controllers;
 
 import com.fasterxml.jackson.databind.annotation.JsonAppend;
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -44,7 +45,7 @@ public class CustomerServicesListController {
 
     @FXML
     private Button doneButton;
-    private static ArrayList<Service> selected;
+    final ObservableList<Service> selected=FXCollections.observableArrayList();
 
     public void initialize()throws IOException {
         EmployeeService.loadEmployees();
@@ -92,17 +93,45 @@ public class CustomerServicesListController {
         });
     }
     public void initCols(){
-        ObservableList<Service> selected= FXCollections.observableArrayList();
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        checkboxColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures, ObservableValue>() {
-            @Override
-            public ObservableValue call(TableColumn.CellDataFeatures param) {
-                CheckBox check = new CheckBox();
-                return new SimpleObjectProperty<CheckBox>(check);
-            }
-        });
-        checkboxColumn.setEditable(true);
+        Callback<TableColumn<Service,String>, TableCell<Service,String>> cellFactory =
+                new Callback<TableColumn<Service, String>, TableCell<Service, String>>() {
+                    @Override
+                    public TableCell<Service, String> call(final TableColumn<Service, String> param) {
+                        final TableCell<Service,String> cell = new TableCell<Service,String>(){
+                            final Button b=new Button("Select it");
+
+                            @Override
+                            protected void updateItem(String item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if(empty){
+                                    setGraphic(null);
+                                    setText(null);
+                                }
+                                else{
+                                    b.setOnAction(event -> {
+                                        //add/remove to/from list
+                                        Service s = getTableView().getItems().get(getIndex());
+                                        if(b.getText().equals("Selected")){
+                                            //remove
+                                            selected.removeIf(serv->serv.equals(s));
+                                            b.setText("Select it");
+                                        }
+                                        else {
+                                            selected.add(s);
+                                            b.setText("Selected");
+                                        }
+                                    });
+                                    setGraphic(b);
+                                    setText(null);
+                                }
+                            }
+                        };
+                        return cell;
+                    }
+                };
+        checkboxColumn.setCellFactory(cellFactory);
     }
 
     @FXML
@@ -119,6 +148,7 @@ public class CustomerServicesListController {
     @FXML
     void handleDoneButton(){
         //link checkboxes with done button
+        //passing selected services to cart
         //go back or to cart
         Stage box = new Stage();
         box.initModality(Modality.APPLICATION_MODAL);
@@ -145,6 +175,15 @@ public class CustomerServicesListController {
         cartB.setOnAction(e->{
             box.close();
             //link to my cart page
+            CustomerCartController.selectedservices=selected;
+            try{
+                Stage stage = (Stage) doneButton.getScene().getWindow();
+                Parent viewCustomerPageRoot = FXMLLoader.load(getClass().getResource("/Customer_Cart.fxml"));
+                Scene customerScene=new Scene(viewCustomerPageRoot,600,380);
+                stage.setScene(customerScene);
+            } catch (IOException ex){
+                ex.printStackTrace();
+            }
         });
         hb.getChildren().addAll(cartB,closeB);
         alertscene.getChildren().addAll(aLabel,hb);
@@ -153,5 +192,7 @@ public class CustomerServicesListController {
         box.setScene(scene);
         box.show();
     }
-
+    public ObservableList<Service> getSelected(){
+        return selected;
+    }
 }

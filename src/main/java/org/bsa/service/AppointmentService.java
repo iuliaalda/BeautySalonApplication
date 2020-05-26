@@ -8,6 +8,7 @@ import org.apache.commons.io.FileUtils;
 import org.bsa.model.Appointment;
 import org.bsa.model.Employee;
 import org.bsa.model.Service;
+import org.bsa.model.User;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +20,8 @@ import java.util.List;
 public class AppointmentService {
     private static List<Appointment> appointments;
     static String usr;
+
+
     private static final Path A_PATH=FileSystemService.getPathToFile("config","appointments.json");
     public static void writeAppointment() {
         ArrayList<Appointment> appointments=new ArrayList<>();
@@ -42,18 +45,36 @@ public class AppointmentService {
 
     public static void loadAppointments() throws IOException{
         if(!Files.exists(A_PATH)){
-            FileUtils.copyURLToFile(Appointment.class.getClassLoader().getResource("appointments.json"), new File("src/main/resources/appointments.json"));
+            FileUtils.copyURLToFile(AppointmentService.class.getClassLoader().getResource("appointments.json"), new File("src/main/resources/appointments.json"));
         }
         ObjectMapper objectMapper = new ObjectMapper();
-        File file = new File("src/main/resources/appointments.json");
-        appointments=objectMapper.readValue(file, new TypeReference<List<Appointment>>() {});
+        appointments=objectMapper.readValue(new File("src/main/resources/appointments.json"), new TypeReference<List<Appointment>>() {});
     }
+
 
     public static ObservableList<Appointment> returnAppointments(){
         ObservableList<Appointment> aux=FXCollections.observableArrayList();
         for(Appointment a:appointments)
             aux.add(a);
         return aux;
+    }
+    public static ObservableList<Appointment> returnCertainAppointment(){
+        ObservableList<Appointment> aux=FXCollections.observableArrayList();
+        for(Appointment a:appointments)
+        {
+            if(a.getEmpl().equals(usr)) {
+                aux.add(a);
+            }
+        }
+        return aux;
+    }
+
+    public static String getUsr() {
+        return usr;
+    }
+
+    public static void setUsr(String a) {
+    usr = a;
     }
 
 

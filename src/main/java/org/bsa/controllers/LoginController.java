@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import org.bsa.exceptions.InvalidRole;
 import org.bsa.exceptions.LoginFail;
 import org.bsa.model.User;
+import org.bsa.service.AppointmentService;
 import org.bsa.service.EmployeeService;
 import org.bsa.service.ServicesService;
 import org.bsa.service.UserService;
@@ -98,6 +99,8 @@ public class LoginController {
             {
                 //go to employee page
                 ServicesService ss=new ServicesService();
+                AppointmentService aps=new AppointmentService();
+                aps.setUsr(usr.getUsername());
                 ss.setUsr(usr.getUsername());
                 try{
                     Stage stage = (Stage) warningLogin.getScene().getWindow();

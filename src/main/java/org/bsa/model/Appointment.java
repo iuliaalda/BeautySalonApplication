@@ -7,7 +7,7 @@ public class Appointment {
     String date;
     String empl;
     ArrayList<Service> services;
-
+    public Appointment(){}
     public Appointment(String date, String empl, ArrayList<Service> services) {
         this.date = date;
         this.empl = empl;

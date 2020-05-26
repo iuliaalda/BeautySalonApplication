@@ -45,7 +45,7 @@ public class AppointmentsEmployeeController {
     }
     public void initCols(){
         todayDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-        todayService= new TableColumn<>("Service");
+        //todayService.setCellValueFactory(new PropertyValueFactory<>("service.getType()"));
         //todayService.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Appointment,String> ,
           //      public ObservableValue<String> call(CellDataFeatures<Appointment,String> p)
 

@@ -8,6 +8,7 @@ public class Appointment {
     String empl;
     Boolean status;
     ArrayList<Service> services;
+    //ArrayList<String> typeService;
     public Appointment(){}
     public Appointment(Boolean status,String date, String empl, ArrayList<Service> services) {
         this.status=status;

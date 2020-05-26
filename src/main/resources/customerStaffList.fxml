@@ -12,11 +12,11 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bsa.controllers.CustomerStaffListController">
     <children>
-    <ImageView fx:id="backImage" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
-        <image>
-            <Image url="@background.png" />
-        </image>
-    </ImageView>
+        <ImageView fx:id="backImage" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@background_design.png" />
+            </image>
+        </ImageView>
       <TableView fx:id="tableStaff" layoutX="18.0" layoutY="76.0" prefHeight="300.0" prefWidth="564.0">
          <columns>
             <TableColumn fx:id="fName" prefWidth="121.0" text="First Name" />

@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="employeePage" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bsa.controllers.EmployeePageController">
    <children>
-      <ImageView fx:id="backImage" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="backImage" fitHeight="411.0" fitWidth="606.0" pickOnBounds="true">
          <image>
             <Image url="@background_design.png" />
          </image>

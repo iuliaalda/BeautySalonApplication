@@ -51,31 +51,35 @@ public class AppointmentsEmployeeController {
 
     }
 
+
     @FXML
-    Button backfromAppsButton;
-    public void handleBackButton(ActionEvent actionEvent) {
+    Button CancelledAppsButton;
+    public void handleAppsCancelledAppsButton(ActionEvent actionEvent) {
         try{
-            Scene goBack;
-            Stage stage = (Stage) backfromAppsButton.getScene().getWindow();
-            Parent viewAppointmentsListPageRoot = FXMLLoader.load(getClass().getResource("/EmployeePage.fxml"));
-            goBack= new Scene(viewAppointmentsListPageRoot,600,380);
-            stage.setScene(goBack);
+            Scene goToCancelled;
+            Stage stage = (Stage) CancelledAppsButton.getScene().getWindow();
+            Parent viewCancelledAppointmentsListPageRoot = FXMLLoader.load(getClass().getResource("/CancelledAppointments.fxml"));
+            goToCancelled= new Scene(viewCancelledAppointmentsListPageRoot,600,380);
+            stage.setScene(goToCancelled);
         } catch (IOException e){
             e.printStackTrace();
         }
 
     }
+
     @FXML
-    Button CancelledAppsButton;
-    public void handleAppsCancelledAppsButton(ActionEvent actionEvent) {
+    Button backfromAppsButton;
+    public void gandleBacktoEmployeePage(ActionEvent actionEvent) {
         try{
-            Scene goAhead;
-            Stage stage = (Stage) CancelledAppsButton.getScene().getWindow();
-            Parent viewCancelledAppointmentsListPageRoot = FXMLLoader.load(getClass().getResource("/CancelledAppointments.fxml"));
-            goAhead= new Scene(viewCancelledAppointmentsListPageRoot,600,380);
-            stage.setScene(goAhead);
+            Scene goToEmployeePage;
+            Stage stage = (Stage) backfromAppsButton.getScene().getWindow();
+            Parent viewCancelledAppointmentsListPageRoot = FXMLLoader.load(getClass().getResource("/EmployeePage.fxml"));
+            goToEmployeePage= new Scene(viewCancelledAppointmentsListPageRoot,600,380);
+            stage.setScene(goToEmployeePage);
         } catch (IOException e){
             e.printStackTrace();
         }
+
     }
+
 }

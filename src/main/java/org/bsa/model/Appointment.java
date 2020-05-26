@@ -6,9 +6,11 @@ import java.util.Objects;
 public class Appointment {
     String date;
     String empl;
+    Boolean status;
     ArrayList<Service> services;
     public Appointment(){}
-    public Appointment(String date, String empl, ArrayList<Service> services) {
+    public Appointment(Boolean status,String date, String empl, ArrayList<Service> services) {
+        this.status=status;
         this.date = date;
         this.empl = empl;
         this.services = services;
@@ -30,6 +32,14 @@ public class Appointment {
         this.empl = empl;
     }
 
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
     public ArrayList<Service> getServices() {
         return services;
     }
@@ -45,12 +55,13 @@ public class Appointment {
         Appointment that = (Appointment) o;
         return Objects.equals(getDate(), that.getDate()) &&
                 Objects.equals(getEmpl(), that.getEmpl()) &&
+                Objects.equals(getStatus(), that.getStatus()) &&
                 Objects.equals(getServices(), that.getServices());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getDate(), getEmpl(), getServices());
+        return Objects.hash(getDate(), getEmpl(), getStatus(), getServices());
     }
 
     @Override
@@ -58,6 +69,7 @@ public class Appointment {
         return "Appointment{" +
                 "date='" + date + '\'' +
                 ", empl='" + empl + '\'' +
+                ", status=" + status +
                 ", services=" + services +
                 '}';
     }

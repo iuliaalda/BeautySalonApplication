@@ -20,7 +20,7 @@
                 <Font name="Lucida Calligraphy Italic" size="27.0" />
             </font>
         </Label>
-        <Button fx:id="backfromAppsButton" layoutX="27.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleBackButton" text="Back" />
+        <Button fx:id="backfromAppsButton" layoutX="27.0" layoutY="35.0" mnemonicParsing="false" onAction="#gandleBacktoEmployeePage" text="Back" />
         <TableView fx:id="TodayAppsTableView" layoutX="61.0" layoutY="129.0" prefHeight="200.0" prefWidth="491.0">
             <columns>
                 <TableColumn fx:id="todayDate" prefWidth="157.0" text="Date" />

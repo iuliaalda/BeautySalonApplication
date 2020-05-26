@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #fafa;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bsa.controllers.AppointmentsEmployeeController">
+    <children>
+        <Label fx:id="appointments" layoutX="197.0" layoutY="35.0" text="Appointments">
+            <font>
+                <Font name="Lucida Calligraphy Italic" size="27.0" />
+            </font>
+        </Label>
+        <Button fx:id="backfromAppsButton" layoutX="27.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleBackButton" text="Back" />
+        <TableView fx:id="TodayAppsTableView" layoutX="68.0" layoutY="126.0" prefHeight="200.0" prefWidth="200.0">
+            <columns>
+                <TableColumn fx:id="todayDate" prefWidth="75.0" text="Date" />
+                <TableColumn fx:id="todayService" prefWidth="75.0" text="Services" />
+            </columns>
+        </TableView>
+        <TableView fx:id="CancelledAppsTableView" layoutX="327.0" layoutY="126.0" prefHeight="200.0" prefWidth="253.0">
+            <columns>
+                <TableColumn prefWidth="75.0" text="Date" />
+                <TableColumn prefWidth="75.0" text="Sevices" />
+                <TableColumn prefWidth="75.0" text="Free time" />
+            </columns>
+        </TableView>
+        <Label layoutX="356.0" layoutY="97.0" text="Cancelled Appointments">
+            <font>
+                <Font name="Lucida Calligraphy Italic" size="15.0" />
+            </font>
+        </Label>
+        <Label layoutX="78.0" layoutY="97.0" text="Today's Appointments">
+            <font>
+                <Font name="Lucida Calligraphy Italic" size="15.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

@@ -28,6 +28,6 @@
          <font>
             <Font name="Times New Roman" size="20.0" />
          </font></Label>
-      <Button fx:id="viewAppointments" layoutX="196.0" layoutY="268.0" mnemonicParsing="false" text="View Appointments" />
+      <Button fx:id="viewAppointments" layoutX="196.0" layoutY="268.0" mnemonicParsing="false" onAction="#handleAppointmentButton" text="View Appointments" />
    </children>
 </AnchorPane>

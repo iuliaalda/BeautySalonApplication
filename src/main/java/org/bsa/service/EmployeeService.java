@@ -23,7 +23,7 @@ import java.util.List;
 
 public class EmployeeService {
     private static List<Employee> employees;
-    private static final Path EMP_PATH= FileSystemService.getPathToFile("config", "\\employees.json");
+    private static final Path EMP_PATH= FileSystemService.getPathToFile("config", "employees.json");
 
     public static void writeEmployees(){
         //adds employees with respective services to json file
@@ -38,7 +38,7 @@ public class EmployeeService {
         Employee e2 = new Employee( "Bia","xyz","Bianka", "Beuka", 21, "hair stylist", 3,s2);
         employee.add(e1);
         employee.add(e2);
-        Path EMP_PATH = FileSystemService.getPathToFile("config", "\\employees.json");
+        Path EMP_PATH = FileSystemService.getPathToFile("config", "employees.json");
         try{
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.writeValue(new File("src/main/resources/employees.json"),employee);
@@ -94,7 +94,7 @@ public class EmployeeService {
     }
     public static void loadEmployees()throws IOException{
         if(!Files.exists(EMP_PATH)){
-            FileUtils.copyURLToFile(User.class.getClassLoader().getResource("\\employees.json"), new File("src/main/resources/employees.json"));
+            FileUtils.copyURLToFile(User.class.getClassLoader().getResource("employees.json"), new File("src/main/resources/employees.json"));
         }
         ObjectMapper objectMapper = new ObjectMapper();
         File file = new File("src/main/resources/employees.json");

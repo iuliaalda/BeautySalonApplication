@@ -10,13 +10,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import org.apache.commons.io.FileUtils;
 import org.bsa.model.User;
 import org.bsa.service.*;
+
+import java.io.File;
+import java.io.IOException;
 
 
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
+        copyData();
         UserService.loadUsersFromFile();
         /*EmployeeService.writeEmployees();
         ServicesService.addServices();*/
@@ -29,7 +34,14 @@ public class Main extends Application {
         primaryStage.show();
 
     }
+    public void copyData() throws IOException {
+        FileUtils.copyURLToFile(Main.class.getClassLoader().getResource("users.json"), new File("src/main/resources/users.json"));
+        FileUtils.copyURLToFile(Main.class.getClassLoader().getResource("employees.json"), new File("src/main/resources/employees.json"));
+        FileUtils.copyURLToFile(Main.class.getClassLoader().getResource("services.json"), new File("src/main/resources/services.json"));
+        FileUtils.copyURLToFile(Main.class.getClassLoader().getResource("background.png"), new File("src/main/resources/background.png"));
+        FileUtils.copyURLToFile(Main.class.getClassLoader().getResource("Loginimage.png"), new File("src/main/resources/Loginimage.png"));
 
+    }
     public static void main(String[] args) {
         launch(args);
     }

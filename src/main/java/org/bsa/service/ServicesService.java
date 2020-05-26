@@ -22,7 +22,7 @@ import java.util.List;
 public class ServicesService {
     private static List<Service> services;
     static String usr;
-    private static final Path S_PATH=FileSystemService.getPathToFile("config","\\services.json");
+    private static final Path S_PATH=FileSystemService.getPathToFile("config","services.json");
 
     public static void addServices() throws IOException{
         ObservableList<Employee> employeeList=FXCollections.observableArrayList();
@@ -45,7 +45,7 @@ public class ServicesService {
 
     public static void loadServices() throws IOException{
         if(!Files.exists(S_PATH)){
-            FileUtils.copyURLToFile(Service.class.getClassLoader().getResource("\\services.json"), new File("src/main/resources/services.json"));
+            FileUtils.copyURLToFile(Service.class.getClassLoader().getResource("services.json"), new File("src/main/resources/services.json"));
         }
         ObjectMapper objectMapper = new ObjectMapper();
         File file = new File("src/main/resources/services.json");

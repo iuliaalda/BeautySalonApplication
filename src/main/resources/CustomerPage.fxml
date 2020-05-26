@@ -25,12 +25,12 @@
             <Font name="Times New Roman" size="20.0" />
          </font></Label>
       <Button fx:id="viewStaffButton" layoutX="260.0" layoutY="135.0" mnemonicParsing="false" onAction="#handleViewStaffButton" text="View Staff" />
-      <Button fx:id="viewServicesButton" layoutX="252.0" layoutY="249.0" mnemonicParsing="false" text="Services List" />
+      <Button fx:id="viewServicesButton" layoutX="252.0" layoutY="249.0" mnemonicParsing="false" text="Services List" onAction="#handleViewServices"/>
       <Label fx:id="viewServicesLabel" layoutX="86.0" layoutY="208.0" text="In order to choose the services, press the button below:" textFill="#d71a9b">
          <font>
             <Font name="Times New Roman" size="20.0" />
          </font></Label>
-      <Button fx:id="myCartButton" layoutX="67.0" layoutY="347.0" mnemonicParsing="false" text="My Cart" />
+      <Button fx:id="myCartButton" layoutX="67.0" layoutY="347.0" mnemonicParsing="false" text="My Cart" onAction="#handleCartAction"/>
       <Button fx:id="appointmentsButton" layoutX="457.0" layoutY="347.0" mnemonicParsing="false" text="Appointments" />
    </children>
 </AnchorPane>

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.apache.commons.io.FileUtils;
+import org.bsa.model.Appointment;
 import org.bsa.model.Employee;
 import org.bsa.model.Service;
 import org.bsa.model.User;

@@ -25,4 +25,15 @@ public class EmployeePageController {
             e.printStackTrace();
         }
     }
+    public void handleAppointmentButton(){
+        try{
+            Scene listScene;
+            Stage stage = (Stage) viewApptsEmployee.getScene().getWindow();
+            Parent viewAppointmentsListPageRoot = FXMLLoader.load(getClass().getResource("/Employee_appointments.fxml"));
+            listScene= new Scene(viewAppointmentsListPageRoot,600,380);
+            stage.setScene(listScene);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 }

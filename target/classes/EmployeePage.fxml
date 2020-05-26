@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -9,15 +10,24 @@
 
 <AnchorPane fx:id="employeePage" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bsa.controllers.EmployeePageController">
    <children>
-      <ImageView fx:id="loginImage" fitHeight="439.0" fitWidth="623.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="backImage" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@BSABackground.png" />
+            <Image url="@background_design.png" />
          </image>
       </ImageView>
       <Button fx:id="editServicesButton" layoutX="226.0" layoutY="146.0" mnemonicParsing="false" onAction="#handleEmployeeButton" text="Services List" />
-      <Label fx:id="welcomeEmployeeLabel" layoutX="26.0" layoutY="23.0" text="Welcome to the employee page!" />
-      <Label layoutX="36.0" layoutY="103.0" text="In order to view or edit the services provided, press the button below:" />
-      <Label fx:id="viewApptsEmployee" layoutX="40.0" layoutY="217.0" text="In order to view the appointments for today, press the button below:" />
-      <Button fx:id="viewAppointments" layoutX="222.0" layoutY="279.0" mnemonicParsing="false" text="View Appointments" />
+      <Label fx:id="welcomeEmployeeLabel" layoutX="21.0" layoutY="21.0" text="Welcome to the employee page!" textFill="#d71a9b">
+         <font>
+            <Font name="Lucida Calligraphy Italic" size="22.0" />
+         </font></Label>
+      <Label layoutX="36.0" layoutY="103.0" text="In order to view or edit the services provided, press the button below:" textFill="#d71a9b">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font></Label>
+      <Label fx:id="viewApptsEmployee" layoutX="40.0" layoutY="217.0" text="In order to view the appointments for today, press the button below:" textFill="#d71a9b">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font></Label>
+      <Button fx:id="viewAppointments" layoutX="196.0" layoutY="268.0" mnemonicParsing="false" text="View Appointments" />
    </children>
 </AnchorPane>

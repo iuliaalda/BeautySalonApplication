@@ -11,9 +11,9 @@
 
 <AnchorPane fx:id="customerPage" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bsa.controllers.CustomerPageController">
    <children>
-      <ImageView fx:id="backImage" fitHeight="439.0" fitWidth="623.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="backImage" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@background.png" />
+            <Image url="@background_design.png" />
          </image>
       </ImageView>
       <Label fx:id="welcomeCustomerLabel" layoutX="24.0" layoutY="27.0" text="Welcome to the customer page!" textFill="#d71a9b">

@@ -15,11 +15,11 @@
             <Image url="@background_design.png" />
          </image>
       </ImageView>
-      <TableView layoutX="64.0" layoutY="120.0" prefHeight="200.0" prefWidth="515.0">
+      <TableView fx:id="CancelledAppsTableView" layoutX="64.0" layoutY="120.0" prefHeight="200.0" prefWidth="515.0">
         <columns>
-          <TableColumn prefWidth="118.0" text="Date" />
-          <TableColumn prefWidth="320.0" text="Services" />
-            <TableColumn prefWidth="76.0" text="Free Time" />
+          <TableColumn fx:id="date" prefWidth="118.0" text="Date" />
+          <TableColumn fx:id="service" prefWidth="320.0" text="Services" />
+            <TableColumn fx:id="freeTimeButton" prefWidth="76.0" text="Free Time" />
         </columns>
       </TableView>
       <Label layoutX="173.0" layoutY="66.0" text="Cancelled Appointments">
@@ -27,7 +27,7 @@
             <Font name="Lucida Calligraphy Italic" size="21.0" />
          </font>
       </Label>
-      <Label layoutX="120.0" layoutY="339.0" text="If you want to free time for an appointments, please press 'Free time' Button" />
+      <Label layoutX="120.0" layoutY="339.0" text="If you want to free time for an appointment, please press 'Free time' Button" />
       <Button fx:id="backtoAppts" layoutX="14.0" layoutY="41.0" mnemonicParsing="false" onAction="#handleToAppointmentsFromCancelled" text="&lt;&lt; APPOINTMENTS" />
    </children>
 </AnchorPane>

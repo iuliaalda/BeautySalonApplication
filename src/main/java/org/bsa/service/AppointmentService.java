@@ -2,15 +2,11 @@ package org.bsa.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.apache.commons.io.FileUtils;
 import org.bsa.model.Appointment;
-import org.bsa.model.Employee;
 import org.bsa.model.Service;
-import org.bsa.model.User;
-import sun.security.krb5.internal.APOptions;
 
 import java.io.File;
 import java.io.IOException;
@@ -64,13 +60,35 @@ public class AppointmentService {
         ObservableList<Appointment> aux=FXCollections.observableArrayList();
         for(Appointment a:appointments)
         {
-            if(a.getEmpl().equals(usr)) {
+            if(a.getEmpl().equals(usr) && a.getStatus().equals(true)) {
                 aux.add(a);
             }
         }
         return aux;
     }
+    public static ObservableList<Appointment> returnCancelledAppointment(){
+        ObservableList<Appointment> aux=FXCollections.observableArrayList();
+        for(Appointment a:appointments)
+        {
+            if(a.getEmpl().equals(usr) && a.getStatus().equals(false)) {
+                aux.add(a);
+            }
+        }
+        return aux;
+    }
+    /*public static ObservableList<Service> returnServicesAppointment(){
+        ObservableList<Service> aux=FXCollections.observableArrayList();
+        for(Appointment a:appointments) {
+            if (a.getEmpl().equals(usr) && a.getStatus().equals(true)) {
+                for (Service s : a.getServices())
+                    if (s.getType().equals(a.getServices()))
+                        aux.add(s);
 
+            }
+        }
+        return aux;
+    }
+*/
     public static String getUsr() {
         return usr;
     }

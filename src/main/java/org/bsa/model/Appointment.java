@@ -7,14 +7,29 @@ public class Appointment {
     String date;
     String empl;
     Boolean status;
-    ArrayList<Service> services;
-    //ArrayList<String> typeService;
+     ArrayList<Service> services;
+     String servicesList;
+
     public Appointment(){}
     public Appointment(Boolean status,String date, String empl, ArrayList<Service> services) {
         this.status=status;
         this.date = date;
         this.empl = empl;
         this.services = services;
+        for(Service s:services) {
+            servicesList = getServicesList();
+        }
+    }
+   public  String getServicesList(){
+        servicesList="";
+        for(Service s:services) {
+            servicesList = servicesList+ s.getType()+"; ";
+        }
+        return servicesList;
+    }
+
+    public void setServicesList(String servicesList) {
+        this.servicesList = servicesList;
     }
 
     public String getDate() {
@@ -60,6 +75,8 @@ public class Appointment {
                 Objects.equals(getServices(), that.getServices());
     }
 
+
+
     @Override
     public int hashCode() {
         return Objects.hash(getDate(), getEmpl(), getStatus(), getServices());
@@ -74,4 +91,5 @@ public class Appointment {
                 ", services=" + services +
                 '}';
     }
+
 }

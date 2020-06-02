@@ -19,7 +19,7 @@
         <columns>
           <TableColumn fx:id="date" prefWidth="118.0" text="Date" />
           <TableColumn fx:id="service" prefWidth="320.0" text="Services" />
-            <TableColumn fx:id="freeTimeButton" prefWidth="76.0" text="Free Time" />
+            <TableColumn fx:id="freeTime" prefWidth="76.0" text="Free Time" />
         </columns>
       </TableView>
       <Label layoutX="173.0" layoutY="66.0" text="Cancelled Appointments">

@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.apache.commons.io.FileUtils;
 import org.bsa.model.Appointment;
+import org.bsa.model.Employee;
 import org.bsa.model.Service;
 
 import java.io.File;
@@ -31,9 +32,14 @@ public class AppointmentService {
         s2.add(new Service("Long Hairstyle",55,"Bia"));
         s3.add(new Service("Long Hairstyle",55,"Bia"));
         appointments.add(new Appointment(true,"2020:06:12 12:00","Iulia",s1));
-        appointments.add(new Appointment(true,"2020:06:12 16:00","Bia",s3));
+        appointments.add(new Appointment(false,"2020:06:12 14:00","Iulia",s1));
+        appointments.add(new Appointment(false,"2020:06:12 16:00","Bia",s3));
+        appointments.add(new Appointment(true,"2020:06:12 15:00","Bia",s3));
         appointments.add(new Appointment(false,"2020:06:12 8:00","Bia",s2));
         appointments.add(new Appointment(false,"2020:06:12 10:00","Bia",s3));
+        appointments.add(new Appointment(true,"2020:06:12 15:00","Iulia",s1));
+        appointments.add(new Appointment(false,"2020:06:12 17:00","Iulia",s1));
+
         Path A_PATH = FileSystemService.getPathToFile("config", "appointments.json");
         try{
             ObjectMapper objectMapper = new ObjectMapper();
@@ -76,19 +82,7 @@ public class AppointmentService {
         }
         return aux;
     }
-    /*public static ObservableList<Service> returnServicesAppointment(){
-        ObservableList<Service> aux=FXCollections.observableArrayList();
-        for(Appointment a:appointments) {
-            if (a.getEmpl().equals(usr) && a.getStatus().equals(true)) {
-                for (Service s : a.getServices())
-                    if (s.getType().equals(a.getServices()))
-                        aux.add(s);
 
-            }
-        }
-        return aux;
-    }
-*/
     public static String getUsr() {
         return usr;
     }
@@ -96,11 +90,50 @@ public class AppointmentService {
     public static void setUsr(String a) {
     usr = a;
     }
+    public static void removeCancelled(Appointment a){
+        ObservableList<Appointment> appointments;
+        appointments=returnCancelledAppointment();
+        appointments.removeIf(app->app.equals(a));
+        try{
+            ObjectMapper objectMapper = new ObjectMapper();
+            File file = new File("src/main/resources/appointments.json");
+            objectMapper.writeValue(file,appointments);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    public static void removeAppsfromCancelled( Appointment a) //String usr,
+    {
+        ObservableList<Appointment> apps=FXCollections.observableArrayList();
+        //apps=returnCancelledAppointment();
+       // System.out.println("cancelled"+apps.toString());
+        ObservableList<Appointment> toRemove=FXCollections.observableArrayList();
+            for (Appointment appointment : apps) {
+                if (appointment.equals(a) && a.getEmpl().equals(usr) && appointment.getDate().equals(a.getDate()))// && a.getEmpl().equals(usr)  appointment.getDate().equals(a.getDate())
+                {
+                  toRemove.add(a);
+                   // System.out.println("\ncancelled"+a.toString());
+                    //AppointmentService.removeCancelled(a);
+                }
 
-
-
-
+            }
+            apps.remove(toRemove);
+        try{
+            ObjectMapper objectMapper = new ObjectMapper();
+            File file = new File("src/main/resources/appointments.json");
+            objectMapper.writeValue(file,apps);
+            objectMapper.writeValue(file, AppointmentService.returnCertainAppointment());
+        }catch (IOException exception){exception.printStackTrace();}
+    }
 
 
 
 }
+
+
+
+
+
+
+
+

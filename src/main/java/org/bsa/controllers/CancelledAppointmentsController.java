@@ -62,7 +62,7 @@ public class CancelledAppointmentsController {
     }
 
     public void initCols(){
-        // AppointmentService as=new AppointmentService();
+        AppointmentService as=new AppointmentService();
         date.setCellValueFactory(new PropertyValueFactory<>("date"));
         service.setResizable(true);
         service.setCellValueFactory(new PropertyValueFactory<>("servicesList"));
@@ -86,8 +86,8 @@ public class CancelledAppointmentsController {
                                     button.setOnAction((ActionEvent event) -> {
                                         if(!buttonPressed)
                                             buttonPressed=true;
-                                        Appointment a = getTableView().getItems().get(getIndex());
-                                            AppointmentService.removeAppsfromCancelled(a);
+                                            Appointment a = getTableView().getItems().get(getIndex());
+                                            AppointmentService.removeAppsfromCancelled(as.getUsr(),a);
                                             button.setDisable(true);
 
                                         // System.out.println("pressed button");

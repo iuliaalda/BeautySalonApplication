@@ -41,7 +41,7 @@ public class Main extends Application {
         FileUtils.copyURLToFile(Main.class.getClassLoader().getResource("services.json"), new File("src/main/resources/services.json"));
         FileUtils.copyURLToFile(Main.class.getClassLoader().getResource("background.png"), new File("src/main/resources/background.png"));
         FileUtils.copyURLToFile(Main.class.getClassLoader().getResource("Loginimage.png"), new File("src/main/resources/Loginimage.png"));
-
+        FileUtils.copyURLToFile(Main.class.getClassLoader().getResource("appointments.json"), new File("src/main/resources/appointments.json"));
     }
     public static void main(String[] args) {
         launch(args);

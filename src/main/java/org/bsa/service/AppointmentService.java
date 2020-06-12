@@ -90,9 +90,9 @@ public class AppointmentService {
     public static void setUsr(String a) {
     usr = a;
     }
-    public static void removeCancelled(Appointment a){
-        ObservableList<Appointment> appointments;
-        appointments=returnCancelledAppointment();
+    public static void removeCancelled(Appointment a)  {
+      // ObservableList<Appointment> appointments;
+        appointments=returnAppointments();
         appointments.removeIf(app->app.equals(a));
         try{
             ObjectMapper objectMapper = new ObjectMapper();
@@ -102,7 +102,7 @@ public class AppointmentService {
             e.printStackTrace();
         }
     }
-    public static void removeAppsfromCancelled( String user, Appointment a) //String usr,
+    /*public static void removeAppsfromCancelled( String user, Appointment a) //String usr,
     {
         ObservableList<Appointment> apps=FXCollections.observableArrayList();
         apps=returnAppointments();
@@ -113,7 +113,7 @@ public class AppointmentService {
                 {
                    toRemove.add(appointment);
                    // System.out.println("\ncancelled"+a.toString());
-                    AppointmentService.removeCancelled(appointment);
+                    //AppointmentService.removeCancelled(appointment);
 
                 }
                 apps.remove(toRemove);
@@ -124,7 +124,7 @@ public class AppointmentService {
             File file = new File("src/main/resources/appointments.json");
             objectMapper.writeValue(file,apps);
         }catch (IOException exception){exception.printStackTrace();}
-    }
+    }*/
 
 
 

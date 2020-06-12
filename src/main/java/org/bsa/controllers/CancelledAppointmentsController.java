@@ -84,10 +84,8 @@ public class CancelledAppointmentsController {
                                 } else {
                                     setGraphic(button);
                                     button.setOnAction((ActionEvent event) -> {
-                                        if(!buttonPressed)
-                                            buttonPressed=true;
                                             Appointment a = getTableView().getItems().get(getIndex());
-                                            AppointmentService.removeAppsfromCancelled(as.getUsr(),a);
+                                            AppointmentService.removeCancelled(a);
                                             button.setDisable(true);
 
                                         // System.out.println("pressed button");

@@ -10,6 +10,10 @@ public class Employee extends User{
     private String serviceType;
     private int yearsExperience;
     private ArrayList<Service> listServices;
+
+
+
+
     public Employee(){super();}
 
     public Employee(String username, String password,  String firstName, String lastName, int age, String serviceType, int yearsExperience, ArrayList<Service> listServices) {

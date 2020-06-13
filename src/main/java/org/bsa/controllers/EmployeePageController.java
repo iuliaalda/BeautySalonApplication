@@ -10,8 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class EmployeePageController {
-    @FXML
-    Button editServicesButton;
+
     @FXML
     Label viewApptsEmployee;
     public void handleEmployeeButton(){

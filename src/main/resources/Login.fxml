@@ -12,7 +12,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bsa.controllers.LoginController">
    <children>
-      <ImageView fx:id="loginImage" fitHeight="439.0" fitWidth="623.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="loginImage" fitHeight="375.0" fitWidth="623.0" pickOnBounds="true">
          <image>
             <Image url="@Loginimage.png" />
          </image>

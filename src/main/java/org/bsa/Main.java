@@ -23,7 +23,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         copyData();
         UserService.loadUsersFromFile();
-        AppointmentService.writeAppointment();
+        //AppointmentService.writeAppointment();
         /*EmployeeService.writeEmployees();
         ServicesService.addServices();*/
         Parent root= FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));

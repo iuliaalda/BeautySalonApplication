@@ -28,11 +28,11 @@ public class UserService {
 
     public static void loadUsersFromFile()throws IOException{
         if(!Files.exists(USERS_PATH)){
-            FileUtils.copyURLToFile(UserService.class.getClassLoader().getResource("users.json"), new File("src/main/resources/users.json"));
+            FileUtils.copyURLToFile(UserService.class.getClassLoader().getResource("users.json"), USERS_PATH.toFile());
         }
         ObjectMapper objectMapper = new ObjectMapper();
         //objectMapper.readerWithView(USERS_PATH.getClass());
-        users=objectMapper.readValue(new File("src/main/resources/users.json"), new TypeReference<List<User>>() {});
+        users=objectMapper.readValue(new File("src\\main\\resources\\users.json"), new TypeReference<List<User>>() {});
         //System.out.println("Read users"+users);
     }
 

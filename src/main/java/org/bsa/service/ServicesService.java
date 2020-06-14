@@ -36,7 +36,7 @@ public class ServicesService {
         services=s;
         try{
             ObjectMapper objectMapper = new ObjectMapper();
-            File file = new File("src/main/resources/services.json");
+            File file = new File("src\\main\\resources\\services.json");
             objectMapper.writeValue(file,services);
         }catch(IOException e){
             e.printStackTrace();
@@ -45,11 +45,12 @@ public class ServicesService {
 
     public static void loadServices() throws IOException{
         if(!Files.exists(S_PATH)){
-            FileUtils.copyURLToFile(Service.class.getClassLoader().getResource("services.json"), new File("src/main/resources/services.json"));
+            FileUtils.copyURLToFile(Service.class.getClassLoader().getResource("services.json"), S_PATH.toFile());
         }
         ObjectMapper objectMapper = new ObjectMapper();
-        File file = new File("src/main/resources/services.json");
+        File file = new File("src\\main\\resources\\services.json");
         services=objectMapper.readValue(file, new TypeReference<List<Service>>() {});
+        //System.out.println(services);
     }
     public static ObservableList<Service> returnServ(){
         ObservableList<Service> aux=FXCollections.observableArrayList();
@@ -63,7 +64,7 @@ public class ServicesService {
         service.add(s);
         try{
             ObjectMapper objectMapper = new ObjectMapper();
-            File file = new File("src/main/resources/services.json");
+            File file = new File("src\\main\\resources\\services.json");
             objectMapper.writeValue(file,service);
         }catch(IOException e){
             e.printStackTrace();
@@ -80,7 +81,7 @@ public class ServicesService {
         }
         try{
             ObjectMapper objectMapper = new ObjectMapper();
-            File file = new File("src/main/resources/services.json");
+            File file = new File("src\\main\\resources\\services.json");
             objectMapper.writeValue(file,service);
         }catch(IOException e){
             e.printStackTrace();
@@ -92,7 +93,7 @@ public class ServicesService {
         service.removeIf(serv->serv.equals(s));
         try{
             ObjectMapper objectMapper = new ObjectMapper();
-            File file = new File("src/main/resources/services.json");
+            File file = new File("src\\main\\resources\\services.json");
             objectMapper.writeValue(file,service);
         }catch(IOException e){
             e.printStackTrace();

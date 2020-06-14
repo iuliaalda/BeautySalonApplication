@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -16,12 +17,17 @@
             <Image url="@background_design.png" />
         </image>
     </ImageView>
-      <TableView layoutX="46.0" layoutY="63.0" prefHeight="274.0" prefWidth="508.0">
+      <TableView fx:id="tableCart" layoutX="46.0" layoutY="63.0" prefHeight="274.0" prefWidth="508.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="serviceColumn" prefWidth="313.0" text="Service" />
+          <TableColumn fx:id="priceColumn" prefWidth="194.0" text="Price" />
         </columns>
       </TableView>
       <Button fx:id="backButton" layoutX="16.0" layoutY="340.0" mnemonicParsing="false" onAction="#handleBackButton" text="Back" />
+      <Text fill="#2f0707" layoutX="189.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Cart 🛒" textAlignment="CENTER" wrappingWidth="222.35546875">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
     </children>
 </AnchorPane>

@@ -43,16 +43,16 @@ public class AppointmentService {
         Path A_PATH = FileSystemService.getPathToFile("config", "appointments.json");
         try{
             ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.writeValue(new File("src/main/resources/appointments.json"),appointments);
+            objectMapper.writeValue(new File("src\\main\\resources\\appointments.json"),appointments);
         }catch (IOException e){e.printStackTrace();}
     }
 
     public static void loadAppointments() throws IOException{
         if(!Files.exists(A_PATH)){
-            FileUtils.copyURLToFile(AppointmentService.class.getClassLoader().getResource("appointments.json"), new File("src/main/resources/appointments.json"));
+            FileUtils.copyURLToFile(AppointmentService.class.getClassLoader().getResource("appointments.json"), A_PATH.toFile());
         }
         ObjectMapper objectMapper = new ObjectMapper();
-        appointments=objectMapper.readValue(new File("src/main/resources/appointments.json"), new TypeReference<List<Appointment>>() {});
+        appointments=objectMapper.readValue(new File("src\\main\\resources\\appointments.json"), new TypeReference<List<Appointment>>() {});
     }
 
 
@@ -96,7 +96,7 @@ public class AppointmentService {
         appointments.removeIf(app->app.equals(a));
         try{
             ObjectMapper objectMapper = new ObjectMapper();
-            File file = new File("src/main/resources/appointments.json");
+            File file = new File("src\\main\\resources\\appointments.json");
             objectMapper.writeValue(file,appointments);
         }catch(IOException e){
             e.printStackTrace();

@@ -42,7 +42,7 @@ public class EmployeeService {
         Path EMP_PATH = FileSystemService.getPathToFile("config", "employees.json");
         try{
             ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.writeValue(new File("src/main/resources/employees.json"),employee);
+            objectMapper.writeValue(new File("src\\main\\resources\\employees.json"),employee);
         }catch (IOException e){e.printStackTrace();}
     }
     public static void writeServicetoEmployee(String username,Service s){
@@ -59,7 +59,7 @@ public class EmployeeService {
 
         try{
             ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.writeValue(new File("src/main/resources/employees.json"),e);
+            objectMapper.writeValue(new File("src\\main\\resources\\employees.json"),e);
         }catch (IOException exception){exception.printStackTrace();}
 
     }
@@ -75,7 +75,7 @@ public class EmployeeService {
         }
         try{
             ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.writeValue(new File("src/main/resources/employees.json"),e);
+            objectMapper.writeValue(new File("src\\main\\resources\\employees.json"),e);
         }catch (IOException exception){exception.printStackTrace();}
     }
     public static void removeServicefromEmployee(String username, Service s){
@@ -90,17 +90,17 @@ public class EmployeeService {
         }
         try{
             ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.writeValue(new File("src/main/resources/employees.json"),e);
+            objectMapper.writeValue(new File("src\\main\\resources\\employees.json"),e);
         }catch (IOException exception){exception.printStackTrace();}
     }
     public static void loadEmployees()throws IOException{
         if(!Files.exists(EMP_PATH)){
-            FileUtils.copyURLToFile(User.class.getClassLoader().getResource("employees.json"), new File("src/main/resources/employees.json"));
+            FileUtils.copyURLToFile(User.class.getClassLoader().getResource("employees.json"), EMP_PATH.toFile());
         }
         ObjectMapper objectMapper = new ObjectMapper();
-        File file = new File("src/main/resources/employees.json");
+        File file = new File("src\\main\\resources\\employees.json");
         employees=objectMapper.readValue(file, new TypeReference<List<Employee>>() {});
-
+        //System.out.println(employees);
     }
     public static ObservableList<Employee> returnEmp(){
         ObservableList<Employee> aux= FXCollections.observableArrayList();

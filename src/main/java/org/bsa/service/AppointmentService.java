@@ -28,7 +28,7 @@ import java.util.List;
 public class AppointmentService {
     private static List<Appointment> appointments;
     static String usr;
-
+    static String clientusr;
     private static final Path A_PATH=FileSystemService.getPathToFile("config","appointments.json");
     public static void writeAppointment() {
         ArrayList<Appointment> appointments=new ArrayList<>();
@@ -40,14 +40,14 @@ public class AppointmentService {
         s2.add(new Service("Short Hairstyle",40,"Bia"));
         s2.add(new Service("Long Hairstyle",55,"Bia"));
         s3.add(new Service("Long Hairstyle",55,"Bia"));
-        appointments.add(new Appointment(true,"2020:06:12 12:00","Iulia",s1));
-        appointments.add(new Appointment(false,"2020:06:12 14:00","Iulia",s1));
-        appointments.add(new Appointment(false,"2020:06:12 16:00","Bia",s3));
-        appointments.add(new Appointment(true,"2020:06:12 15:00","Bia",s3));
-        appointments.add(new Appointment(false,"2020:06:12 8:00","Bia",s2));
-        appointments.add(new Appointment(false,"2020:06:12 10:00","Bia",s3));
-        appointments.add(new Appointment(true,"2020:06:12 15:00","Iulia",s1));
-        appointments.add(new Appointment(false,"2020:06:12 17:00","Iulia",s1));
+        appointments.add(new Appointment(true,"2020:06:12 12:00","Iulia","A",s1));
+        appointments.add(new Appointment(false,"2020:06:12 14:00","Iulia","A",s1));
+        appointments.add(new Appointment(false,"2020:06:12 16:00","Bia","B",s3));
+        appointments.add(new Appointment(true,"2020:06:12 15:00","Bia","B",s3));
+        appointments.add(new Appointment(false,"2020:06:12 8:00","Bia","A",s2));
+        appointments.add(new Appointment(false,"2020:06:12 10:00","Bia","A",s3));
+        appointments.add(new Appointment(true,"2020:06:12 15:00","Iulia","B",s1));
+        appointments.add(new Appointment(false,"2020:06:12 17:00","Iulia","B",s1));
 
         Path A_PATH = FileSystemService.getPathToFile("config", "appointments.json");
         try{
@@ -97,10 +97,17 @@ public class AppointmentService {
     }
 
     public static void setUsr(String a) {
-    usr = a;
+        usr = a;
+    }
+    public static String getClientusr() {
+        return clientusr;
+    }
+
+    public static void setClientusr(String a) {
+        clientusr = a;
     }
     public static void removeCancelled(Appointment a)  {
-      // ObservableList<Appointment> appointments;
+        // ObservableList<Appointment> appointments;
         appointments=returnAppointments();
         appointments.removeIf(app->app.equals(a));
         try{
@@ -114,10 +121,10 @@ public class AppointmentService {
 
     public static void addAppointment(ArrayList<Appointment> appointms) throws EqualHour, IOException,NullPointerException {
         appointments=returnAppointments();
-      //CustomerCartController c=git stanew CustomerCartController();
-     //ObservableList<Appointment> ap=FXCollections.observableArrayList();
-     //ap=c.handleFinishButton();
-      appointments.addAll(appointms);
+        //CustomerCartController c=git stanew CustomerCartController();
+        //ObservableList<Appointment> ap=FXCollections.observableArrayList();
+        //ap=c.handleFinishButton();
+        appointments.addAll(appointms);
         try{
             ObjectMapper objectMapper = new ObjectMapper();
             File file = new File("src\\main\\resources\\appointments.json");
@@ -154,11 +161,3 @@ public class AppointmentService {
 
 
 }
-
-
-
-
-
-
-
-

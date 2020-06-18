@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.StringConverter;
 import javafx.util.converter.DateTimeStringConverter;
 import org.bsa.exceptions.EqualHour;
@@ -48,6 +49,8 @@ public class CustomerCartController {
     TableColumn serviceColumn;
     @FXML
     TableColumn priceColumn;
+    @FXML
+    TableColumn deleteColumn;
     @FXML
     Button backButton;
     @FXML
@@ -134,7 +137,39 @@ public class CustomerCartController {
     public void initCols() {
         serviceColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        deleteColumn.setCellValueFactory(new PropertyValueFactory<>("delete"));
+        Callback<TableColumn<Service,String>, TableCell<Service,String>> cellFactory =
+                new Callback<TableColumn<Service, String>, TableCell<Service, String>>() {
+                    @Override
+                    public TableCell<Service, String> call(final TableColumn<Service, String> param) {
+                        final TableCell<Service,String> cell = new TableCell<Service,String>(){
+                            final Button b=new Button("Delete");
 
+                            @Override
+                            protected void updateItem(String item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if(empty){
+                                    setGraphic(null);
+                                    setText(null);
+                                }
+                                else{
+                                    b.setOnAction(event -> {
+                                        //delete service
+                                        Service serv=getTableView().getItems().get(getIndex());
+                                        CustomerServicesListController s = new CustomerServicesListController();
+                                        ObservableList<Service> services = FXCollections.observableArrayList();
+                                        services = s.getSelected();
+                                        services.removeIf(a->a.equals(serv));
+                                    });
+                                    setGraphic(b);
+                                    setText(null);
+                                }
+                            }
+                        };
+                        return cell;
+                    }
+                };
+        deleteColumn.setCellFactory(cellFactory);
     }
 
     public void setSelectedservices(ObservableList<Service> s) {
@@ -191,7 +226,7 @@ public class CustomerCartController {
         boolean check=false;
         String choiceBoxHour = (String) hour.getValue();
         //System.out.print(" "+choiceBoxHour);
-       ArrayList<Appointment> appointms =new ArrayList<>();
+        ArrayList<Appointment> appointms =new ArrayList<>();
         //ObservableList<Appointment> appointments=FXCollections.observableArrayList();
         ObservableList<Appointment> appointments = FXCollections.observableArrayList();
         appointments = AppointmentService.returnAppointments();
@@ -211,22 +246,24 @@ public class CustomerCartController {
                 s2.add(s1);
         }
         //System.out.println(s2);
+        AppointmentService as=new AppointmentService();
+        String client_username=as.getClientusr();
         try {
-        if(!datePicker.getValue().equals(null)) {
-            for(ArrayList<Service> aux:s2){
-                ap1 = new Appointment(true, datePicker.getValue() + " " + choiceBoxHour, aux.get(0).getEmpl(), aux);
-                for (Appointment ap : appointments)
+            if(!datePicker.getValue().equals(null)) {
+                for(ArrayList<Service> aux:s2){
+                    ap1 = new Appointment(true, datePicker.getValue() + " " + choiceBoxHour, aux.get(0).getEmpl(), client_username,aux);
+                    for (Appointment ap : appointments)
                         if ((ap1.getEmpl().equals(ap.getEmpl()) && ap1.getDate().equals(ap.getDate())))
                             check=true;
-                        if(check==true)
-                            throw new EqualHour();
-                        else
-                appointms.add(ap1);
+                    if(check==true)
+                        throw new EqualHour();
+                    else
+                        appointms.add(ap1);
+                }
+
             }
 
-        }
-
-     }catch (EqualHour ee){
+        }catch (EqualHour ee){
             Stage alert = new Stage();
             alert.initModality(Modality.APPLICATION_MODAL);
             VBox alertscene = new VBox(20);
@@ -257,7 +294,7 @@ public class CustomerCartController {
             alert.show();
         }
         AppointmentService.addAppointment(appointms);
-       // System.out.println(appointms);
+        System.out.println(appointms);
         //return  appointments;
     }
 }

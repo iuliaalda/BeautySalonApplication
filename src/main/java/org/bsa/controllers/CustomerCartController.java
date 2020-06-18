@@ -22,6 +22,7 @@ import org.bsa.exceptions.InvalidHour;
 import org.bsa.model.Appointment;
 import org.bsa.model.Service;
 import org.bsa.service.AppointmentService;
+import org.bsa.service.EmployeeService;
 import org.jetbrains.annotations.Nls;
 import org.omg.CORBA.DATA_CONVERSION;
 import sun.security.krb5.internal.APOptions;
@@ -109,7 +110,7 @@ public class CustomerCartController {
         });
 
     }*/
-    public void initialize() {
+    public void initialize() throws IOException {
        /* format = new SimpleDateFormat("yyyy:MM:dd HH:mm");
         datePicker.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -119,6 +120,7 @@ public class CustomerCartController {
                 display.setText(date.toString());
             }
         });*/
+        AppointmentService.loadAppointments();
         initializeChoiceBox();
         CustomerServicesListController s = new CustomerServicesListController();
         ObservableList<Service> services = FXCollections.observableArrayList();
@@ -181,33 +183,65 @@ public class CustomerCartController {
         });
         return datePicker.toString();
     }
-    ObservableList<Appointment> appointments = FXCollections.observableArrayList();
-    public ObservableList<Appointment>  handleFinishButton() throws IOException {
+
+    public void  handleFinishButton() throws IOException, EqualHour {
+        CustomerServicesListController sc = new CustomerServicesListController();
+        ObservableList<Service> selectedservice = FXCollections.observableArrayList();
+        selectedservice = sc.getSelected();
+        boolean check=false;
         String choiceBoxHour = (String) hour.getValue();
         //System.out.print(" "+choiceBoxHour);
        ArrayList<Appointment> appointms =new ArrayList<>();
         //ObservableList<Appointment> appointments=FXCollections.observableArrayList();
-        AppointmentService.loadAppointments();
-        appointments = AppointmentService.returnCertainAppointment();
+        ObservableList<Appointment> appointments = FXCollections.observableArrayList();
+        appointments = AppointmentService.returnAppointments();
         Appointment ap1;
-        Appointment ap2;
         ArrayList<Service> s1 = new ArrayList<>();
-        ArrayList<Service> s2 = new ArrayList<>();
-        for (Service s : selectedservices) {
-            if (s.getEmpl().equals("Bia"))
-                s1.add(s);
-            else
-                s2.add(s);
+        ArrayList<ArrayList<Service>> s2 = new ArrayList<>();
+        ObservableList<String> all_employees=FXCollections.observableArrayList();
+        all_employees= EmployeeService.returnEmpUser();
+        for(String username:all_employees){
+            s1=new ArrayList<>();
+            for (Service s: selectedservice){
+                if(s.getEmpl().equals(username)){
+                    s1.add(s);
+                }
+            }
+            if(!s1.isEmpty())
+                s2.add(s1);
         }
+        //System.out.println(s2);
         try {
         if(!datePicker.getValue().equals(null)) {
-            ap1 = new Appointment(true, datePicker.getValue() + " " + choiceBoxHour, "Bia", s1);
-            ap2 = new Appointment(true, datePicker.getValue() + " " + choiceBoxHour, "Iulia", s2);
-            appointms.add(ap1);
-            appointms.add(ap2);
+            for(ArrayList<Service> aux:s2){
+                ap1 = new Appointment(true, datePicker.getValue() + " " + choiceBoxHour, aux.get(0).getEmpl(), aux);
+                for (Appointment ap : appointments)
+                        if ((ap1.getEmpl().equals(ap.getEmpl()) && ap1.getDate().equals(ap.getDate())))
+                            check=true;
+                        if(check==true)
+                            throw new EqualHour();
+                        else
+                appointms.add(ap1);
+            }
+
         }
 
-     }catch (NullPointerException ee){
+     }catch (EqualHour ee){
+            Stage alert = new Stage();
+            alert.initModality(Modality.APPLICATION_MODAL);
+            VBox alertscene = new VBox(20);
+            alertscene.setMinSize(200, 100);
+            Label aLabel = new Label();
+            aLabel.setText("The chosen date is unavailable, please choose another one!");
+            Button closeB = new Button("Close");
+            closeB.setOnAction(e -> alert.close());
+            alertscene.getChildren().addAll(aLabel, closeB);
+            alertscene.setAlignment(Pos.CENTER);
+            Scene scene = new Scene(alertscene);
+            alert.setScene(scene);
+            alert.show();
+
+        } catch (NullPointerException e1) {
             Stage alert = new Stage();
             alert.initModality(Modality.APPLICATION_MODAL);
             VBox alertscene = new VBox(20);
@@ -222,30 +256,8 @@ public class CustomerCartController {
             alert.setScene(scene);
             alert.show();
         }
-        try {
-            for (Appointment a : appointms)
-                for (Appointment ap : appointments)
-                    if (!a.getEmpl().equals(ap.getEmpl()) && a.getDate().equals(ap.getEmpl()))
-                        appointments.add(a);
-                    else
-                        throw new EqualHour();
-        } catch (EqualHour e1) {
-            Stage alert = new Stage();
-            alert.initModality(Modality.APPLICATION_MODAL);
-            VBox alertscene = new VBox(20);
-            alertscene.setMinSize(200, 100);
-            Label aLabel = new Label();
-            aLabel.setText("The chosen date is unavailable, please choose another one!");
-            Button closeB = new Button("Close");
-            closeB.setOnAction(e -> alert.close());
-            alertscene.getChildren().addAll(aLabel, closeB);
-            alertscene.setAlignment(Pos.CENTER);
-            Scene scene = new Scene(alertscene);
-            alert.setScene(scene);
-            alert.show();
-        }
-       // appointments.addAll(appointms);
-
-        return  appointments;
+        AppointmentService.addAppointment(appointms);
+       // System.out.println(appointms);
+        //return  appointments;
     }
 }

@@ -82,7 +82,8 @@ public class LoginController {
             if(role=="Customer")
             {
                 //go to customer page
-
+                AppointmentService as=new AppointmentService();
+                as.setClientusr(usr.getUsername());
                 try{
                     Stage stage = (Stage) warningLogin.getScene().getWindow();
                     Parent viewCustomerPageRoot = FXMLLoader.load(getClass().getResource("/CustomerPage.fxml"));
@@ -120,6 +121,3 @@ public class LoginController {
 
     }
 }
-
-
-

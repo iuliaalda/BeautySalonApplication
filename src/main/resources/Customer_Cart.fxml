@@ -20,8 +20,9 @@
     </ImageView>
       <TableView fx:id="tableCart" layoutX="46.0" layoutY="63.0" prefHeight="165.0" prefWidth="508.0">
         <columns>
-          <TableColumn fx:id="serviceColumn" prefWidth="313.0" text="Service" />
-          <TableColumn fx:id="priceColumn" prefWidth="194.0" text="Price" />
+          <TableColumn fx:id="serviceColumn" prefWidth="272.0" text="Service" />
+          <TableColumn fx:id="priceColumn" prefWidth="134.0" text="Price" />
+            <TableColumn fx:id="deleteColumn" prefWidth="101.0" text="Delete" />
         </columns>
       </TableView>
       <Button fx:id="backButton" layoutX="16.0" layoutY="340.0" mnemonicParsing="false" onAction="#handleBackButton" text="Back" />
@@ -32,7 +33,7 @@
       </Text>
       <Button fx:id="finishButton" layoutX="494.0" layoutY="353.0" mnemonicParsing="false" onAction="#handleFinishButton" text="Finish" />
       <ChoiceBox fx:id="hour" layoutX="285.0" layoutY="265.0" prefHeight="25.0" prefWidth="83.0" />
-      <DatePicker fx:id="datePicker" layoutX="66.0" layoutY="265.0"  />
+      <DatePicker fx:id="datePicker" layoutX="66.0" layoutY="265.0" />
       <Label fx:id="display" layoutX="113.0" layoutY="242.0" text="Choose a date:" />
       <Label fx:id="display1" layoutX="285.0" layoutY="242.0" text="Choose an hour:" />
     </children>

@@ -58,6 +58,8 @@ public class CustomerCartController {
     @FXML
     Label display;
     @FXML
+    Button finishButton;
+    @FXML
     DatePicker datePicker = new DatePicker();
     @FXML
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy:MM:dd");
@@ -76,7 +78,7 @@ public class CustomerCartController {
         year.setValue("2020");
         month.getItems().addAll("January","February","March","April","June","July","August","September","October","November","December");
         month.setValue("January");*/
-        hour.getItems().addAll("8:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00");
+        hour.getItems().addAll("8:00", "9:00","10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00");
         hour.setValue("8:00");
     }
 
@@ -255,13 +257,24 @@ public class CustomerCartController {
                     for (Appointment ap : appointments)
                         if ((ap1.getEmpl().equals(ap.getEmpl()) && ap1.getDate().equals(ap.getDate())))
                             check=true;
-                    if(check==true)
+                    if(check)
                         throw new EqualHour();
-                    else
+                    else {
                         appointms.add(ap1);
+                        try{
+
+                            Stage stage = (Stage) finishButton.getScene().getWindow();
+                            Parent viewCustomerPageRoot = FXMLLoader.load(getClass().getResource("/CustomerViewAppointmentsPage.fxml"));
+                            Scene customerScene = new Scene(viewCustomerPageRoot, 600, 380);
+                            stage.setScene(customerScene);
+                        }catch (IOException io)
+                        {io.printStackTrace();}
+
+                    }
                 }
 
             }
+
 
         }catch (EqualHour ee){
             Stage alert = new Stage();
@@ -294,7 +307,7 @@ public class CustomerCartController {
             alert.show();
         }
         AppointmentService.addAppointment(appointms);
-        System.out.println(appointms);
+        //System.out.println(appointms);
         //return  appointments;
     }
 }

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -11,17 +13,27 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bsa.controllers.CustomerCartController">
     <children>
-    <ImageView fx:id="backImage" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+    <ImageView fx:id="backImage" fitHeight="410.0" fitWidth="614.0" focusTraversable="true" layoutX="-4.0" pickOnBounds="true" smooth="false">
         <image>
             <Image url="@background_design.png" />
         </image>
     </ImageView>
-      <TableView layoutX="46.0" layoutY="63.0" prefHeight="274.0" prefWidth="508.0">
+      <TableView fx:id="tableCart" layoutX="46.0" layoutY="63.0" prefHeight="165.0" prefWidth="508.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="serviceColumn" prefWidth="313.0" text="Service" />
+          <TableColumn fx:id="priceColumn" prefWidth="194.0" text="Price" />
         </columns>
       </TableView>
       <Button fx:id="backButton" layoutX="16.0" layoutY="340.0" mnemonicParsing="false" onAction="#handleBackButton" text="Back" />
+      <Text fill="#2f1513" layoutX="189.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Cart 🛒" textAlignment="CENTER" wrappingWidth="222.35546875">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Button fx:id="finishButton" layoutX="494.0" layoutY="353.0" mnemonicParsing="false" onAction="#handleFinishButton" text="Finish" />
+      <ChoiceBox fx:id="hour" layoutX="285.0" layoutY="265.0" prefHeight="25.0" prefWidth="83.0" />
+      <DatePicker fx:id="datePicker" layoutX="66.0" layoutY="265.0"  />
+      <Label fx:id="display" layoutX="113.0" layoutY="242.0" text="Choose a date:" />
+      <Label fx:id="display1" layoutX="285.0" layoutY="242.0" text="Choose an hour:" />
     </children>
 </AnchorPane>

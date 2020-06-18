@@ -4,7 +4,16 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.apache.commons.io.FileUtils;
+import org.bsa.controllers.CustomerCartController;
+import org.bsa.exceptions.EqualHour;
 import org.bsa.model.Appointment;
 import org.bsa.model.Employee;
 import org.bsa.model.Service;
@@ -101,6 +110,22 @@ public class AppointmentService {
         }catch(IOException e){
             e.printStackTrace();
         }
+    }
+
+    public static void addAppointment(ObservableList<Appointment> appointms) throws EqualHour, IOException,NullPointerException {
+        appointments=returnAppointments();
+      //CustomerCartController c=new CustomerCartController();
+     //ObservableList<Appointment> ap=FXCollections.observableArrayList();
+     //ap=c.handleFinishButton();
+      appointments.addAll(appointms);
+        try{
+            ObjectMapper objectMapper = new ObjectMapper();
+            File file = new File("src\\main\\resources\\appointments.json");
+            objectMapper.writeValue(file,appointments);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
     }
     /*public static void removeAppsfromCancelled( String user, Appointment a) //String usr,
     {

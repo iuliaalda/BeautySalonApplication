@@ -45,7 +45,7 @@ public class CustomerServicesListController {
 
     @FXML
     private Button doneButton;
-    final ObservableList<Service> selected=FXCollections.observableArrayList();
+   static ObservableList<Service> selected=FXCollections.observableArrayList();
 
     public void initialize()throws IOException {
         EmployeeService.loadEmployees();

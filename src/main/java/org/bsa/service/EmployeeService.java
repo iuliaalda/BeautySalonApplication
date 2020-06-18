@@ -124,4 +124,11 @@ public class EmployeeService {
         return null;
     }
 
+    public static ObservableList<String> returnEmpUser(){
+        ObservableList<String> aux= FXCollections.observableArrayList();
+        for(Employee employee:employees){
+            aux.add(employee.getUsername());
+        }
+        return aux;
+    }
 }

@@ -112,9 +112,9 @@ public class AppointmentService {
         }
     }
 
-    public static void addAppointment(ObservableList<Appointment> appointms) throws EqualHour, IOException,NullPointerException {
+    public static void addAppointment(ArrayList<Appointment> appointms) throws EqualHour, IOException,NullPointerException {
         appointments=returnAppointments();
-      //CustomerCartController c=new CustomerCartController();
+      //CustomerCartController c=git stanew CustomerCartController();
      //ObservableList<Appointment> ap=FXCollections.observableArrayList();
      //ap=c.handleFinishButton();
       appointments.addAll(appointms);

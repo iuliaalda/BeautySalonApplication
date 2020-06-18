@@ -22,6 +22,7 @@ import org.bsa.exceptions.InvalidHour;
 import org.bsa.model.Appointment;
 import org.bsa.model.Service;
 import org.bsa.service.AppointmentService;
+import org.bsa.service.EmployeeService;
 import org.jetbrains.annotations.Nls;
 import org.omg.CORBA.DATA_CONVERSION;
 import sun.security.krb5.internal.APOptions;
@@ -183,6 +184,10 @@ public class CustomerCartController {
     }
     ObservableList<Appointment> appointments = FXCollections.observableArrayList();
     public ObservableList<Appointment>  handleFinishButton() throws IOException {
+        CustomerServicesListController sc = new CustomerServicesListController();
+        ObservableList<Service> selectedservice = FXCollections.observableArrayList();
+        selectedservice = sc.getSelected();
+
         String choiceBoxHour = (String) hour.getValue();
         //System.out.print(" "+choiceBoxHour);
        ArrayList<Appointment> appointms =new ArrayList<>();
@@ -190,21 +195,28 @@ public class CustomerCartController {
         AppointmentService.loadAppointments();
         appointments = AppointmentService.returnCertainAppointment();
         Appointment ap1;
-        Appointment ap2;
         ArrayList<Service> s1 = new ArrayList<>();
-        ArrayList<Service> s2 = new ArrayList<>();
-        for (Service s : selectedservices) {
-            if (s.getEmpl().equals("Bia"))
-                s1.add(s);
-            else
-                s2.add(s);
+        ArrayList<ArrayList<Service>> s2 = new ArrayList<>();
+        ObservableList<String> all_employees=FXCollections.observableArrayList();
+        all_employees= EmployeeService.returnEmpUser();
+        for(String username:all_employees){
+            s1=new ArrayList<>();
+            for (Service s: selectedservice){
+                if(s.getEmpl().equals(username)){
+                    s1.add(s);
+                }
+            }
+            if(!s1.isEmpty())
+                s2.add(s1);
         }
+        System.out.println(s2);
         try {
         if(!datePicker.getValue().equals(null)) {
-            ap1 = new Appointment(true, datePicker.getValue() + " " + choiceBoxHour, "Bia", s1);
-            ap2 = new Appointment(true, datePicker.getValue() + " " + choiceBoxHour, "Iulia", s2);
-            appointms.add(ap1);
-            appointms.add(ap2);
+            for(ArrayList<Service> aux:s2){
+                ap1 = new Appointment(true, datePicker.getValue() + " " + choiceBoxHour, aux.get(0).getEmpl(), aux);
+                appointms.add(ap1);
+            }
+
         }
 
      }catch (NullPointerException ee){
@@ -245,7 +257,7 @@ public class CustomerCartController {
             alert.show();
         }
        // appointments.addAll(appointms);
-
+        System.out.println(appointms);
         return  appointments;
     }
 }

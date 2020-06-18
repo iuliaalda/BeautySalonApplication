@@ -109,6 +109,13 @@ public class EmployeeService {
         }
         return aux;
     }
+    public static ObservableList<String> returnEmpUser(){
+        ObservableList<String> aux= FXCollections.observableArrayList();
+        for(Employee employee:employees){
+            aux.add(employee.getUsername());
+        }
+        return aux;
+    }
     public static Employee findEmployee(String user){
         for(Employee employee:employees){
             if(employee.getUsername().equals(user))

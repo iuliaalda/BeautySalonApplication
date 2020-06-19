@@ -156,30 +156,4 @@ public class AppointmentService {
 
     }
 
-    /*public static void removeAppsfromCancelled( String user, Appointment a) //String usr,
-    {
-        ObservableList<Appointment> apps=FXCollections.observableArrayList();
-        apps=returnAppointments();
-       // System.out.println("cancelled"+apps.toString());
-        ObservableList<Appointment> toRemove=FXCollections.observableArrayList();
-            for (Appointment appointment : apps) {
-                if (appointment.equals(a) && appointment.getEmpl().equals(usr))// && a.getEmpl().equals(usr)  appointment.getDate().equals(a.getDate())
-                {
-                   toRemove.add(appointment);
-                   // System.out.println("\ncancelled"+a.toString());
-                    //AppointmentService.removeCancelled(appointment);
-
-                }
-                apps.remove(toRemove);
-            }
-            //apps.remove(toRemove);
-        try{
-            ObjectMapper objectMapper = new ObjectMapper();
-            File file = new File("src/main/resources/appointments.json");
-            objectMapper.writeValue(file,apps);
-        }catch (IOException exception){exception.printStackTrace();}
-    }*/
-
-
-
 }

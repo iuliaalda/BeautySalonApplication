@@ -21,6 +21,8 @@ import org.bsa.service.AppointmentService;
 
 import java.io.IOException;
 import java.lang.management.BufferPoolMXBean;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CustomerViewAppointmentsPage {
     @FXML
@@ -82,10 +84,32 @@ public class CustomerViewAppointmentsPage {
                                             Button yesB=new Button("Yes");
                                             yesB.setOnAction(e->{
                                                 Appointment a=getTableView().getItems().get(getIndex());
-                                                AppointmentService.setStatustoFalse(a);
-                                                box.close();
-                                                b.setText("Cancelled");
-                                                b.setDisable(true);
+                                                String[] app_date=a.getDate().split("-");
+                                                Date d = new Date();
+                                                String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(d);
+                                                String[] date=modifiedDate.split("-");
+                                                int d1,d2;
+                                                d1=Integer.parseInt(app_date[2]);
+                                                d2=Integer.parseInt(date[2]);
+                                                if(app_date[1].equals(date[1])&&(d1-d2>2)){
+                                                    AppointmentService.setStatustoFalse(a);
+                                                    box.close();
+                                                    b.setText("Cancelled");
+                                                    b.setDisable(true);
+                                                }
+                                                else{
+                                                    Stage alerts = new Stage();
+                                                    alerts.initModality(Modality.APPLICATION_MODAL);
+                                                    VBox vb = new VBox(20);
+                                                    vb.setMinSize(200,100);
+                                                    Label label=new Label("Cannot cancel an appointment 1 day prior to it!");
+                                                    vb.getChildren().addAll(label);
+                                                    vb.setAlignment(Pos.CENTER);
+                                                    Scene scene = new Scene(vb);
+                                                    alerts.setScene(scene);
+                                                    alerts.show();
+                                                }
+
                                             });
                                             Button noB=new Button("No");
                                             noB.setOnAction(e->box.close());

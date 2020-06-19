@@ -66,58 +66,14 @@ public class CustomerCartController {
     DatePicker datePicker = new DatePicker();
     @FXML
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy:MM:dd");
-    // Date date = c.getTime();
 
-    /*  @FXML
-             SimpleDateFormat format = new SimpleDateFormat(":mm:ss");
-             dateField.setTextFormatter(new TextFormatter<>(new DateTimeStringConverter(format), format.parse("00:00:00")));*/
     @FXML
     public void initializeChoiceBox() {
-
-        /*(year.getItems().addAll("2020","2021");
-
-        day.getItems().addAll(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,26,27,28,29,30,31);
-        day.setValue("1");
-        year.setValue("2020");
-        month.getItems().addAll("January","February","March","April","June","July","August","September","October","November","December");
-        month.setValue("January");*/
         hour.getItems().addAll("8:00", "9:00","10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00");
         hour.setValue("8:00");
     }
 
-
-    /*  @FXML
-      SimpleDateFormat format = new SimpleDateFormat(":mm:ss");
-      dateField.setTextFormatter(new TextFormatter<>(new DateTimeStringConverter(format), format.parse("00:00:00")));*/
     static ObservableList<Service> selectedservices = FXCollections.observableArrayList();
-
-    /*public  void handleDate{
-        datePicker.setConverter(new StringConverter<LocalDate>() {
-            String pattern = "yyyy:MM:dd";
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
-
-            {
-                datePicker.setPromptText(pattern.toLowerCase());
-            }
-
-            @Override public String toString(LocalDate date) {
-                if (date != null) {
-                    return dateFormatter.format(date);
-                } else {
-                    return "";
-                }
-            }
-
-            @Override public LocalDate fromString(String string) {
-                if (string != null && !string.isEmpty()) {
-                    return LocalDate.parse(string, dateFormatter);
-                } else {
-                    return null;
-                }
-            }
-        });
-
-    }*/
     public void initialize() throws IOException {
        /* format = new SimpleDateFormat("yyyy:MM:dd HH:mm");
         datePicker.setOnAction(new EventHandler<ActionEvent>() {
@@ -193,37 +149,6 @@ public class CustomerCartController {
         }
     }
 
-    public String handleDate() {
-        // String dateString;
-        datePicker.setConverter(new StringConverter<LocalDate>() {
-            String pattern = "yyyy:MM:dd";
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
-
-            {
-                datePicker.setPromptText(pattern.toLowerCase());
-            }
-
-            @Override
-            public String toString(LocalDate date) {
-                if (date != null) {
-                    return dateFormatter.format(date);
-                } else {
-                    return "";
-                }
-            }
-
-            @Override
-            public LocalDate fromString(String string) {
-                if (string != null && !string.isEmpty()) {
-                    return LocalDate.parse(string, dateFormatter);
-                } else {
-                    return null;
-                }
-            }
-        });
-        return datePicker.toString();
-    }
-
     public void  handleFinishButton() throws IOException, EqualHour {
         CustomerServicesListController sc = new CustomerServicesListController();
         ObservableList<Service> selectedservice = FXCollections.observableArrayList();
@@ -289,8 +214,6 @@ public class CustomerCartController {
                         Button finishTheAppointments=new Button("Finish the appointments");
                         finishTheAppointments.setOnAction(e->{
                             box.close();
-                            //link to my cart page
-                            //CustomerCartController.selectedservices=selected;
                             try {
                                 AppointmentService.addAppointment(appointms);
                                 CustomerCartController.selectedservices=null;//setam pe null ca nu mai avem servicii selectate
@@ -313,13 +236,9 @@ public class CustomerCartController {
                         Scene scene = new Scene(alertscene);
                         box.setScene(scene);
                         box.show();
-
-
                     }
                         else
                         throw new EqualHour();
-
-
                 }
             }
         }catch (EqualHour ee){
@@ -352,11 +271,6 @@ public class CustomerCartController {
             alert.setScene(scene);
             alert.show();
         }
-
-
-
-        //System.out.println(appointms);
-        //return  appointments;
     }
 
     public void handleGoToMyApps(ActionEvent actionEvent) {

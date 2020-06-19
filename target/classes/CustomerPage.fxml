@@ -31,6 +31,6 @@
             <Font name="Times New Roman" size="20.0" />
          </font></Label>
       <Button fx:id="myCartButton" layoutX="67.0" layoutY="347.0" mnemonicParsing="false" text="My Cart" onAction="#handleCartAction"/>
-      <Button fx:id="appointmentsButton" layoutX="457.0" layoutY="347.0" mnemonicParsing="false" text="Appointments" />
+      <Button fx:id="appointmentsButton" layoutX="457.0" layoutY="347.0" mnemonicParsing="false" text="Appointments" onAction="#handleAppointmentAction" />
    </children>
 </AnchorPane>

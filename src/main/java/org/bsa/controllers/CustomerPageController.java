@@ -1,5 +1,6 @@
 package org.bsa.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
@@ -42,6 +43,17 @@ public class CustomerPageController {
         try{
             Stage stage = (Stage) welcomeCustomerLabel.getScene().getWindow();
             Parent viewCustomerPageRoot = FXMLLoader.load(getClass().getResource("/Customer_Cart.fxml"));
+            Scene customerScene=new Scene(viewCustomerPageRoot,600,380);
+            stage.setScene(customerScene);
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+    }
+
+    public void handleAppointmentAction(ActionEvent actionEvent) {
+        try{
+            Stage stage = (Stage) welcomeCustomerLabel.getScene().getWindow();
+            Parent viewCustomerPageRoot = FXMLLoader.load(getClass().getResource("/CustomerViewAppointmentsPage.fxml"));
             Scene customerScene=new Scene(viewCustomerPageRoot,600,380);
             stage.setScene(customerScene);
         } catch (IOException ex){

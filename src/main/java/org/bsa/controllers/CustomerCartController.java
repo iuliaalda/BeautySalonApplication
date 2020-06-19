@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -52,11 +53,15 @@ public class CustomerCartController {
     @FXML
     TableColumn deleteColumn;
     @FXML
+    Button goToMyApps;
+    @FXML
     Button backButton;
     @FXML
     ChoiceBox hour = new ChoiceBox();
     @FXML
     Label display;
+    @FXML
+    Button finishButton;
     @FXML
     DatePicker datePicker = new DatePicker();
     @FXML
@@ -76,7 +81,7 @@ public class CustomerCartController {
         year.setValue("2020");
         month.getItems().addAll("January","February","March","April","June","July","August","September","October","November","December");
         month.setValue("January");*/
-        hour.getItems().addAll("8:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00");
+        hour.getItems().addAll("8:00", "9:00","10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00");
         hour.setValue("8:00");
     }
 
@@ -250,19 +255,73 @@ public class CustomerCartController {
         String client_username=as.getClientusr();
         try {
             if(!datePicker.getValue().equals(null)) {
-                for(ArrayList<Service> aux:s2){
-                    ap1 = new Appointment(true, datePicker.getValue() + " " + choiceBoxHour, aux.get(0).getEmpl(), client_username,aux);
+                for(ArrayList<Service> aux:s2) {
+                    ap1 = new Appointment(true, datePicker.getValue() + " " + choiceBoxHour, aux.get(0).getEmpl(), client_username, aux);
                     for (Appointment ap : appointments)
                         if ((ap1.getEmpl().equals(ap.getEmpl()) && ap1.getDate().equals(ap.getDate())))
-                            check=true;
-                    if(check==true)
+                            check = true;
+
+                    if (check==false)
+                    { appointms.add(ap1);
+                        //AppointmentService.addAppointment(appointms);
+
+                        Stage box = new Stage();
+                        box.initModality(Modality.APPLICATION_MODAL);
+                        VBox alertscene = new VBox(30);
+                        alertscene.setMinSize(200,100);
+                        Label aLabel=new Label();
+                        aLabel.setText("Choose one:");
+                        HBox hb=new HBox();
+                        hb.setSpacing(10);
+                        hb.setAlignment(Pos.CENTER);
+                        Button closeB=new Button("View my appointments");
+                        closeB.setOnAction(e->{
+                            box.close();
+                            try{
+                                Stage stage = (Stage) finishButton.getScene().getWindow();
+                                Parent viewCustomerPageRoot = FXMLLoader.load(getClass().getResource("/CustomerViewAppointmentsPage.fxml"));
+                                Scene customerScene=new Scene(viewCustomerPageRoot,600,380);
+                                stage.setScene(customerScene);
+                            } catch (IOException ex){
+                                ex.printStackTrace();
+                            }
+                        });
+                        Button finishTheAppointments=new Button("Finish the appointments");
+                        finishTheAppointments.setOnAction(e->{
+                            box.close();
+                            //link to my cart page
+                            //CustomerCartController.selectedservices=selected;
+                            try {
+                                AppointmentService.addAppointment(appointms);
+                                CustomerCartController.selectedservices=null;//setam pe null ca nu mai avem servicii selectate
+                                initialize();
+                            } catch (EqualHour | IOException equalHour) {
+                                equalHour.printStackTrace();
+                            }
+                            try{
+                                Stage stage = (Stage) finishButton.getScene().getWindow();
+                                Parent viewCustomerPageRoot = FXMLLoader.load(getClass().getResource("/Customer_Cart.fxml"));
+                                Scene customerScene=new Scene(viewCustomerPageRoot,600,380);
+                                stage.setScene(customerScene);
+                            } catch (IOException ex){
+                                ex.printStackTrace();
+                            }
+                        });
+                        hb.getChildren().addAll(finishTheAppointments,closeB);
+                        alertscene.getChildren().addAll(aLabel,hb);
+                        alertscene.setAlignment(Pos.CENTER);
+                        Scene scene = new Scene(alertscene);
+                        box.setScene(scene);
+                        box.show();
+
+
+                    }
+                        else
                         throw new EqualHour();
-                    else
-                        appointms.add(ap1);
+
+
                 }
-
             }
-
         }catch (EqualHour ee){
             Stage alert = new Stage();
             alert.initModality(Modality.APPLICATION_MODAL);
@@ -293,8 +352,21 @@ public class CustomerCartController {
             alert.setScene(scene);
             alert.show();
         }
-        AppointmentService.addAppointment(appointms);
-        System.out.println(appointms);
+
+
+
+        //System.out.println(appointms);
         //return  appointments;
+    }
+
+    public void handleGoToMyApps(ActionEvent actionEvent) {
+        try{
+            Stage stage = (Stage) goToMyApps.getScene().getWindow();
+            Parent viewCustomerPageRoot = FXMLLoader.load(getClass().getResource("/CustomerViewAppointmentsPage.fxml"));
+            Scene customerScene=new Scene(viewCustomerPageRoot,600,380);
+            stage.setScene(customerScene);
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
     }
 }

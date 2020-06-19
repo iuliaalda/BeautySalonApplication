@@ -53,7 +53,6 @@ public class CustomerViewAppointmentsPage {
 
     private void initCols() {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        //priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         servicesColumn.setCellValueFactory(new PropertyValueFactory<>("servicesList"));
         cancelColumn.setCellValueFactory(new PropertyValueFactory<>("cancel"));
         Callback<TableColumn<Appointment,String>, TableCell<Appointment,String>> cellFactory =

@@ -75,22 +75,13 @@ public class CustomerCartController {
 
     static ObservableList<Service> selectedservices = FXCollections.observableArrayList();
     public void initialize() throws IOException {
-       /* format = new SimpleDateFormat("yyyy:MM:dd HH:mm");
-        datePicker.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                LocalDate date=datePicker.getValue();
-                System.out.print(date);
-                display.setText(date.toString());
-            }
-        });*/
+
         AppointmentService.loadAppointments();
         initializeChoiceBox();
         CustomerServicesListController s = new CustomerServicesListController();
         ObservableList<Service> services = FXCollections.observableArrayList();
         services = s.getSelected();
         tableCart.setItems(services);
-        // System.out.print(services+"\n ");
         initCols();
 
     }
@@ -155,9 +146,7 @@ public class CustomerCartController {
         selectedservice = sc.getSelected();
         boolean check=false;
         String choiceBoxHour = (String) hour.getValue();
-        //System.out.print(" "+choiceBoxHour);
         ArrayList<Appointment> appointms =new ArrayList<>();
-        //ObservableList<Appointment> appointments=FXCollections.observableArrayList();
         ObservableList<Appointment> appointments = FXCollections.observableArrayList();
         appointments = AppointmentService.returnAppointments();
         Appointment ap1;
@@ -175,7 +164,6 @@ public class CustomerCartController {
             if(!s1.isEmpty())
                 s2.add(s1);
         }
-        //System.out.println(s2);
         AppointmentService as=new AppointmentService();
         String client_username=as.getClientusr();
         try {
@@ -188,8 +176,6 @@ public class CustomerCartController {
 
                     if (check==false)
                     { appointms.add(ap1);
-                        //AppointmentService.addAppointment(appointms);
-
                         Stage box = new Stage();
                         box.initModality(Modality.APPLICATION_MODAL);
                         VBox alertscene = new VBox(30);

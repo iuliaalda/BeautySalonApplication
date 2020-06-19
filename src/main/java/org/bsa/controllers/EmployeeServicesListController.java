@@ -189,18 +189,7 @@ public class EmployeeServicesListController {
                 };
         delete.setCellFactory(cellFactoryDelete);
     }
-    /*private void editCol(){
-        service.setCellFactory(TextFieldTableCell.forTableColumn());
-        service.setOnEditCommit(e->{
-            e.getTableView().getItems().get(e.getTablePosition().getRow()).setType(e.getNewValue());
-        });
-        price.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
-        price.setOnEditCommit(e->{
-            e.getTableView().getItems().get(e.getTablePosition().getRow()).setPrice(e.getNewValue());
-        });
 
-        employeeServices.setEditable(true);
-    }*/
     @FXML
     void handleBackButton(){
         try{

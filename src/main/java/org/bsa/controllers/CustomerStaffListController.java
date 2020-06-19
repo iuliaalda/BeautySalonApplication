@@ -46,7 +46,6 @@ public class CustomerStaffListController {
     @FXML
     Button backButton;
     public void initialize() throws IOException{
-        //ObservableList<Employee> list = FXCollections.observableArrayList();
         EmployeeService.loadEmployees();
         fName.setCellValueFactory(new PropertyValueFactory<Employee,String>("firstName"));
         lName.setCellValueFactory(new PropertyValueFactory<Employee,String>("lastName"));
@@ -57,15 +56,6 @@ public class CustomerStaffListController {
         tableStaff.setItems(EmployeeService.returnEmp());
     }
 
-    /* example for testing functionality
-    public ObservableList<Employee> getEmployees(){
-        ObservableList<Employee> emp= FXCollections.observableArrayList();
-        //EmployeeService.loadEmployees();
-        emp.add(new Employee("Iulia","abcde","Iulia","Alda",20,"makeup",2));
-        emp.add(new Employee("Maria","njkznk","Maria","Crisan",26,"hair stylist",5));
-        return emp;
-    }
-    */
     @FXML
     void handleBackButton(){
         try{

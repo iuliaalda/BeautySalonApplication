@@ -56,7 +56,7 @@ public class CancelledAppointmentsController {
     public void initTable() {
         initCols();
         ObservableList<Appointment> aux = FXCollections.observableArrayList();
-        aux = AppointmentService.returnCancelledAppointment();
+        aux = AppointmentService.returnNextCancelledApps();
         CancelledAppsTableView.setItems(aux);
 
     }

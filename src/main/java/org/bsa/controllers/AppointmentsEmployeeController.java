@@ -41,7 +41,7 @@ public class AppointmentsEmployeeController {
     public  void initTable(){
         initCols();
         ObservableList<Appointment> aux= FXCollections.observableArrayList();
-        aux=AppointmentService.returnCertainAppointment();
+        aux=AppointmentService.returnTodayApps();
         TodayAppsTableView.setItems(aux);
 
     }

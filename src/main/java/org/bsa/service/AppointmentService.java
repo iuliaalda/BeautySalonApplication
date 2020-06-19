@@ -22,7 +22,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class AppointmentService {
@@ -40,10 +43,10 @@ public class AppointmentService {
         s2.add(new Service("Short Hairstyle",40,"Bia"));
         s2.add(new Service("Long Hairstyle",55,"Bia"));
         s3.add(new Service("Long Hairstyle",55,"Bia"));
-        appointments.add(new Appointment(true,"2020-06-12 12:00","Iulia","A",s1));
-        appointments.add(new Appointment(false,"2020-06-12 14:00","Iulia","A",s1));
+        appointments.add(new Appointment(true,"2020-06-19 12:00","Iulia","A",s1));
+        appointments.add(new Appointment(false,"2020-06-21 14:00","Iulia","A",s1));
         appointments.add(new Appointment(false,"2020-06-12 16:00","Bia","B",s3));
-        appointments.add(new Appointment(true,"2020-06-12 15:00","Bia","B",s3));
+        appointments.add(new Appointment(true,"2020-06-25 15:00","Bia","B",s3));
         appointments.add(new Appointment(false,"2020-06-12 8:00","Bia","A",s2));
         appointments.add(new Appointment(false,"2020-06-12 10:00","Bia","A",s3));
         appointments.add(new Appointment(true,"2020-06-12 15:00","Iulia","B",s1));
@@ -71,6 +74,48 @@ public class AppointmentService {
             aux.add(a);
         return aux;
     }
+
+    public static ObservableList<Appointment> returnTodayApps(){
+        ObservableList<Appointment> aux=FXCollections.observableArrayList();
+
+        for(Appointment a:appointments)
+        {
+            if(a.getEmpl().equals(usr) && a.getStatus().equals(true)) {
+                String[] app_date = a.getDate().split("-| ");
+                Date d = new Date();
+                String modifiedDate = new SimpleDateFormat("yyyy-MM-dd").format(d);
+                int d1,d2;
+                String[] date=modifiedDate.split("-");
+                d1=Integer.parseInt(app_date[2]);
+                d2=Integer.parseInt(date[2]);
+                if(app_date[1].equals(date[1])&&(d1-d2==0) ) {
+                aux.add(a);
+                }
+            }
+        }
+        return aux;
+    }
+    public static ObservableList<Appointment> returnNextCancelledApps(){
+        ObservableList<Appointment> aux=FXCollections.observableArrayList();
+
+        for(Appointment a:appointments)
+        {
+            if(a.getEmpl().equals(usr) && a.getStatus().equals(false)) {
+                String[] app_date = a.getDate().split("-| ");
+                Date d = new Date();
+                String modifiedDate = new SimpleDateFormat("yyyy-MM-dd").format(d);
+                int d1,d2;
+                String[] date=modifiedDate.split("-");
+                d1=Integer.parseInt(app_date[2]);
+                d2=Integer.parseInt(date[2]);
+                if(app_date[1].equals(date[1])&&((d1-d2>=0))) {
+                    aux.add(a);
+                }
+            }
+        }
+        return aux;
+    }
+
     public static ObservableList<Appointment> returnCertainAppointment(){
         ObservableList<Appointment> aux=FXCollections.observableArrayList();
         for(Appointment a:appointments)

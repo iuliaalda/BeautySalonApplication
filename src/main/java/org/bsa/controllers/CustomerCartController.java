@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -51,6 +52,8 @@ public class CustomerCartController {
     TableColumn priceColumn;
     @FXML
     TableColumn deleteColumn;
+    @FXML
+    Button goToMyApps;
     @FXML
     Button backButton;
     @FXML
@@ -252,30 +255,73 @@ public class CustomerCartController {
         String client_username=as.getClientusr();
         try {
             if(!datePicker.getValue().equals(null)) {
-                for(ArrayList<Service> aux:s2){
-                    ap1 = new Appointment(true, datePicker.getValue() + " " + choiceBoxHour, aux.get(0).getEmpl(), client_username,aux);
+                for(ArrayList<Service> aux:s2) {
+                    ap1 = new Appointment(true, datePicker.getValue() + " " + choiceBoxHour, aux.get(0).getEmpl(), client_username, aux);
                     for (Appointment ap : appointments)
                         if ((ap1.getEmpl().equals(ap.getEmpl()) && ap1.getDate().equals(ap.getDate())))
-                            check=true;
-                    if(check)
-                        throw new EqualHour();
-                    else {
-                        appointms.add(ap1);
-                        try{
+                            check = true;
 
-                            Stage stage = (Stage) finishButton.getScene().getWindow();
-                            Parent viewCustomerPageRoot = FXMLLoader.load(getClass().getResource("/CustomerViewAppointmentsPage.fxml"));
-                            Scene customerScene = new Scene(viewCustomerPageRoot, 600, 380);
-                            stage.setScene(customerScene);
-                        }catch (IOException io)
-                        {io.printStackTrace();}
+                    if (check==false)
+                    { appointms.add(ap1);
+                        //AppointmentService.addAppointment(appointms);
+
+                        Stage box = new Stage();
+                        box.initModality(Modality.APPLICATION_MODAL);
+                        VBox alertscene = new VBox(30);
+                        alertscene.setMinSize(200,100);
+                        Label aLabel=new Label();
+                        aLabel.setText("Choose one:");
+                        HBox hb=new HBox();
+                        hb.setSpacing(10);
+                        hb.setAlignment(Pos.CENTER);
+                        Button closeB=new Button("View my appointments");
+                        closeB.setOnAction(e->{
+                            box.close();
+                            try{
+                                Stage stage = (Stage) finishButton.getScene().getWindow();
+                                Parent viewCustomerPageRoot = FXMLLoader.load(getClass().getResource("/CustomerViewAppointmentsPage.fxml"));
+                                Scene customerScene=new Scene(viewCustomerPageRoot,600,380);
+                                stage.setScene(customerScene);
+                            } catch (IOException ex){
+                                ex.printStackTrace();
+                            }
+                        });
+                        Button finishTheAppointments=new Button("Finish the appointments");
+                        finishTheAppointments.setOnAction(e->{
+                            box.close();
+                            //link to my cart page
+                            //CustomerCartController.selectedservices=selected;
+                            try {
+                                AppointmentService.addAppointment(appointms);
+                                CustomerCartController.selectedservices=null;//setam pe null ca nu mai avem servicii selectate
+                                initialize();
+                            } catch (EqualHour | IOException equalHour) {
+                                equalHour.printStackTrace();
+                            }
+                            try{
+                                Stage stage = (Stage) finishButton.getScene().getWindow();
+                                Parent viewCustomerPageRoot = FXMLLoader.load(getClass().getResource("/Customer_Cart.fxml"));
+                                Scene customerScene=new Scene(viewCustomerPageRoot,600,380);
+                                stage.setScene(customerScene);
+                            } catch (IOException ex){
+                                ex.printStackTrace();
+                            }
+                        });
+                        hb.getChildren().addAll(finishTheAppointments,closeB);
+                        alertscene.getChildren().addAll(aLabel,hb);
+                        alertscene.setAlignment(Pos.CENTER);
+                        Scene scene = new Scene(alertscene);
+                        box.setScene(scene);
+                        box.show();
+
 
                     }
+                        else
+                        throw new EqualHour();
+
+
                 }
-
             }
-
-
         }catch (EqualHour ee){
             Stage alert = new Stage();
             alert.initModality(Modality.APPLICATION_MODAL);
@@ -306,8 +352,21 @@ public class CustomerCartController {
             alert.setScene(scene);
             alert.show();
         }
-        AppointmentService.addAppointment(appointms);
+
+
+
         //System.out.println(appointms);
         //return  appointments;
+    }
+
+    public void handleGoToMyApps(ActionEvent actionEvent) {
+        try{
+            Stage stage = (Stage) goToMyApps.getScene().getWindow();
+            Parent viewCustomerPageRoot = FXMLLoader.load(getClass().getResource("/CustomerViewAppointmentsPage.fxml"));
+            Scene customerScene=new Scene(viewCustomerPageRoot,600,380);
+            stage.setScene(customerScene);
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
     }
 }

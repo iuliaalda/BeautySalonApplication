@@ -31,10 +31,13 @@
             <Font size="25.0" />
          </font>
       </Text>
-      <Button fx:id="finishButton" layoutX="523.0" layoutY="340.0" mnemonicParsing="false" onAction="#handleFinishButton" text="Finish " />
+      <Button fx:id="finishButton" layoutX="280.0" layoutY="340.0" mnemonicParsing="false" onAction="#handleFinishButton" text="Finish " />
       <ChoiceBox fx:id="hour" layoutX="285.0" layoutY="265.0" prefHeight="25.0" prefWidth="83.0" />
       <DatePicker fx:id="datePicker" layoutX="66.0" layoutY="265.0" />
       <Label fx:id="display" layoutX="113.0" layoutY="242.0" text="Choose a date:" />
       <Label fx:id="display1" layoutX="285.0" layoutY="242.0" text="Choose an hour:" />
+      <Button fx:id="goToMyApps" layoutX="462.0" layoutY="340.0" mnemonicParsing="false" onAction="#handleGoToMyApps" text="MyAppointments&gt;&gt;" />
+      <Text layoutX="462.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Price:" />
+      <TextField editable="false" layoutX="447.0" layoutY="265.0" prefHeight="25.0" prefWidth="87.0" />
     </children>
 </AnchorPane>

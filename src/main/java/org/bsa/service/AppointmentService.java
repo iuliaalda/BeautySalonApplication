@@ -101,7 +101,18 @@ public class AppointmentService {
         }
         return aux;
     }
-
+    public static void setStatustoFalse(Appointment a){
+        for(Appointment aux:appointments)
+        {
+            if(aux.equals(a)){
+                aux.setStatus(false);
+            }
+        }
+        try{
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.writeValue(new File("src\\main\\resources\\appointments.json"),appointments);
+        }catch (IOException e){e.printStackTrace();}
+    }
     public static String getUsr() {
         return usr;
     }

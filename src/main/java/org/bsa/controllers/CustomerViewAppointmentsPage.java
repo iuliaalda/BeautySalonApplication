@@ -5,19 +5,20 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.bsa.model.Appointment;
 import org.bsa.model.Service;
 import org.bsa.service.AppointmentService;
 
-import java.awt.*;
 import java.io.IOException;
 import java.lang.management.BufferPoolMXBean;
 
@@ -68,11 +69,32 @@ public class CustomerViewAppointmentsPage {
                                     setText(null);
                                 }
                                 else{
-                                        setGraphic(b);
                                         b.setOnAction((ActionEvent event1) -> {
-                                            b.setText("Cancelled");
-                                            b.setDisable(true);
-
+                                            Stage box = new Stage();
+                                            box.initModality(Modality.APPLICATION_MODAL);
+                                            VBox alertscene = new VBox(20);
+                                            alertscene.setMinSize(200,100);
+                                            javafx.scene.control.Label aLabel=new javafx.scene.control.Label();
+                                            aLabel.setText("Are you sure you want to cancel the appointment?");
+                                            HBox hb=new HBox();
+                                            hb.setSpacing(10);
+                                            hb.setAlignment(Pos.CENTER);
+                                            Button yesB=new Button("Yes");
+                                            yesB.setOnAction(e->{
+                                                Appointment a=getTableView().getItems().get(getIndex());
+                                                AppointmentService.setStatustoFalse(a);
+                                                box.close();
+                                                b.setText("Cancelled");
+                                                b.setDisable(true);
+                                            });
+                                            Button noB=new Button("No");
+                                            noB.setOnAction(e->box.close());
+                                            hb.getChildren().addAll(yesB,noB);
+                                            alertscene.getChildren().addAll(aLabel,hb);
+                                            alertscene.setAlignment(Pos.CENTER);
+                                            Scene scene = new Scene(alertscene);
+                                            box.setScene(scene);
+                                            box.show();
                                     });
                                     setGraphic(b);
                                     setText(null);

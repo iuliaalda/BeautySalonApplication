@@ -81,6 +81,16 @@ public class AppointmentService {
         }
         return aux;
     }
+    public  static ObservableList<Appointment> returnMyAppointments()
+    {
+        ObservableList<Appointment> aux=FXCollections.observableArrayList();
+        for(Appointment a:appointments)
+        {
+            if (a.getClient().equals(clientusr) && a.getStatus().equals(true))
+                aux.add(a);
+        }
+        return  aux;
+    }
     public static ObservableList<Appointment> returnCancelledAppointment(){
         ObservableList<Appointment> aux=FXCollections.observableArrayList();
         for(Appointment a:appointments)
@@ -134,6 +144,7 @@ public class AppointmentService {
         }
 
     }
+
     /*public static void removeAppsfromCancelled( String user, Appointment a) //String usr,
     {
         ObservableList<Appointment> apps=FXCollections.observableArrayList();

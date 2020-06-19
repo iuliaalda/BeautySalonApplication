@@ -11,16 +11,16 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bsa.controllers.CustomerViewAppointmentsPage">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="609.0" layoutX="-6.0" pickOnBounds="true">
+      <ImageView fitHeight="400.0" fitWidth="609.0" layoutX="-4.0" pickOnBounds="true">
          <image>
             <Image url="@background_design.png" />
          </image>
       </ImageView>
-      <TableView layoutX="91.0" layoutY="112.0" prefHeight="200.0" prefWidth="415.0">
+      <TableView fx:id="appsTableView" layoutX="14.0" layoutY="124.0" prefHeight="200.0" prefWidth="554.0">
         <columns>
-          <TableColumn prefWidth="146.0" text="Services" />
-          <TableColumn prefWidth="122.0" text="Price" />
-            <TableColumn prefWidth="146.0" text="Cancel " />
+          <TableColumn fx:id="servicesColumn" prefWidth="263.0" text="Services" />
+            <TableColumn fx:id="dateColumn" prefWidth="175.0" text="Date" />
+            <TableColumn fx:id="cancelColumn" prefWidth="114.0" text="Cancel" />
         </columns>
       </TableView>
       <Label layoutX="191.0" layoutY="48.0" text="My Appointments" textFill="#80357b">
@@ -28,5 +28,6 @@
             <Font size="23.0" />
          </font>
       </Label>
+      <Button layoutX="20.0" layoutY="53.0" mnemonicParsing="false" onAction="#handleGoBackToCart" text="My Cart 🛒" />
    </children>
 </AnchorPane>

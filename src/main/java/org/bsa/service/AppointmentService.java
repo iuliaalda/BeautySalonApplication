@@ -40,14 +40,14 @@ public class AppointmentService {
         s2.add(new Service("Short Hairstyle",40,"Bia"));
         s2.add(new Service("Long Hairstyle",55,"Bia"));
         s3.add(new Service("Long Hairstyle",55,"Bia"));
-        appointments.add(new Appointment(true,"2020:06:12 12:00","Iulia","A",s1));
-        appointments.add(new Appointment(false,"2020:06:12 14:00","Iulia","A",s1));
-        appointments.add(new Appointment(false,"2020:06:12 16:00","Bia","B",s3));
-        appointments.add(new Appointment(true,"2020:06:12 15:00","Bia","B",s3));
-        appointments.add(new Appointment(false,"2020:06:12 8:00","Bia","A",s2));
-        appointments.add(new Appointment(false,"2020:06:12 10:00","Bia","A",s3));
-        appointments.add(new Appointment(true,"2020:06:12 15:00","Iulia","B",s1));
-        appointments.add(new Appointment(false,"2020:06:12 17:00","Iulia","B",s1));
+        appointments.add(new Appointment(true,"2020-06-12 12:00","Iulia","A",s1));
+        appointments.add(new Appointment(false,"2020-06-12 14:00","Iulia","A",s1));
+        appointments.add(new Appointment(false,"2020-06-12 16:00","Bia","B",s3));
+        appointments.add(new Appointment(true,"2020-06-12 15:00","Bia","B",s3));
+        appointments.add(new Appointment(false,"2020-06-12 8:00","Bia","A",s2));
+        appointments.add(new Appointment(false,"2020-06-12 10:00","Bia","A",s3));
+        appointments.add(new Appointment(true,"2020-06-12 15:00","Iulia","B",s1));
+        appointments.add(new Appointment(false,"2020-06-12 17:00","Iulia","B",s1));
 
         Path A_PATH = FileSystemService.getPathToFile("config", "appointments.json");
         try{

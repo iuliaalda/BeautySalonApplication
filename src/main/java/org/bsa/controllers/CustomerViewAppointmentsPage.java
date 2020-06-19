@@ -106,10 +106,15 @@ public class CustomerViewAppointmentsPage {
                 };
         cancelColumn.setCellFactory(cellFactory);
     }
-
-    public void handleGoBackToCart(ActionEvent actionEvent) {
-
-
-
+    @FXML
+    void handleGoBackToCart() {
+        try{
+            Stage stage = (Stage) goToMyCart.getScene().getWindow();
+            Parent viewCartPageRoot = FXMLLoader.load(getClass().getResource("/Customer_Cart.fxml"));
+            Scene cartScene=new Scene(viewCartPageRoot,600,380);
+            stage.setScene(cartScene);
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
     }
 }

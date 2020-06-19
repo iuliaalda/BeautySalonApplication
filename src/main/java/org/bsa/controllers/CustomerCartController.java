@@ -202,8 +202,7 @@ public class CustomerCartController {
                             box.close();
                             try {
                                 AppointmentService.addAppointment(appointms);
-                                CustomerCartController.selectedservices=null;//setam pe null ca nu mai avem servicii selectate
-                                initialize();
+                                box.close();
                             } catch (EqualHour | IOException equalHour) {
                                 equalHour.printStackTrace();
                             }

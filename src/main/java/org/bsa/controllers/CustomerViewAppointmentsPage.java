@@ -84,7 +84,7 @@ public class CustomerViewAppointmentsPage {
                                             Button yesB=new Button("Yes");
                                             yesB.setOnAction(e->{
                                                 Appointment a=getTableView().getItems().get(getIndex());
-                                                String[] app_date=a.getDate().split("-");
+                                                String[] app_date=a.getDate().split("-| ");
                                                 Date d = new Date();
                                                 String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(d);
                                                 String[] date=modifiedDate.split("-");
@@ -93,7 +93,6 @@ public class CustomerViewAppointmentsPage {
                                                 d2=Integer.parseInt(date[2]);
                                                 if(app_date[1].equals(date[1])&&(d1-d2>2)){
                                                     AppointmentService.setStatustoFalse(a);
-                                                    box.close();
                                                     b.setText("Cancelled");
                                                     b.setDisable(true);
                                                 }
@@ -101,15 +100,18 @@ public class CustomerViewAppointmentsPage {
                                                     Stage alerts = new Stage();
                                                     alerts.initModality(Modality.APPLICATION_MODAL);
                                                     VBox vb = new VBox(20);
+                                                    Button closeB=new Button("OK!");
                                                     vb.setMinSize(200,100);
+                                                    closeB.setOnAction(ee->alerts.close());
                                                     Label label=new Label("Cannot cancel an appointment 1 day prior to it!");
-                                                    vb.getChildren().addAll(label);
+                                                    vb.getChildren().addAll(label,closeB);
                                                     vb.setAlignment(Pos.CENTER);
                                                     Scene scene = new Scene(vb);
                                                     alerts.setScene(scene);
-                                                    alerts.show();
-                                                }
+                                                    alerts.showAndWait();
 
+                                                }
+                                                box.close();
                                             });
                                             Button noB=new Button("No");
                                             noB.setOnAction(e->box.close());

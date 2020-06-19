@@ -26,7 +26,6 @@ public class CustomerPageController {
         } catch (IOException e){
             e.printStackTrace();
         }
-        //EmployeeService.loadEmployees();
     }
     public void handleViewServices(){
         try{

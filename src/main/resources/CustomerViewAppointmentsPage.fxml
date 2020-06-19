@@ -28,6 +28,6 @@
             <Font size="23.0" />
          </font>
       </Label>
-      <Button layoutX="20.0" layoutY="53.0" mnemonicParsing="false" onAction="#handleGoBackToCart" text="My Cart 🛒" />
+      <Button fx:id="goToMyCart" layoutX="20.0" layoutY="53.0" mnemonicParsing="false" onAction="#handleGoBackToCart" text="My Cart 🛒" />
    </children>
 </AnchorPane>

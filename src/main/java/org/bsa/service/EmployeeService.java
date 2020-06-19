@@ -100,7 +100,6 @@ public class EmployeeService {
         ObjectMapper objectMapper = new ObjectMapper();
         File file = new File("src\\main\\resources\\employees.json");
         employees=objectMapper.readValue(file, new TypeReference<List<Employee>>() {});
-        //System.out.println(employees);
     }
     public static ObservableList<Employee> returnEmp(){
         ObservableList<Employee> aux= FXCollections.observableArrayList();
@@ -123,8 +122,6 @@ public class EmployeeService {
         }
         return null;
     }
-
-
 
 }
 

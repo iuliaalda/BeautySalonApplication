@@ -45,8 +45,6 @@ public class LoginController {
 
     @FXML
     public void initialize() throws IOException{
-        //EmployeeService.writeEmployees();
-        //ServicesService.addServices();
         userChoiceBox.getItems().addAll("Employee", "Customer");
         userChoiceBox.setValue("Customer");
 

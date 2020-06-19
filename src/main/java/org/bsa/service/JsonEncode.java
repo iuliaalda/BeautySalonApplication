@@ -31,8 +31,6 @@ public class JsonEncode extends UserService {
         users.add(u4);
 
         Path USERS_PATH = FileSystemService.getPathToFile("config", "\\users.json");
-
-
         try{
             ObjectMapper objectMapper = new ObjectMapper();
             //objectMapper.writeValue(new File("C:\\Users\\aldai\\Desktop\\Project\\BSApplication\\src\\main\\resources\\users.json"),users);

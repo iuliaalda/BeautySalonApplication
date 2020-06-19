@@ -78,7 +78,6 @@ public class CancelledAppointmentsController {
                             protected void updateItem(String item, boolean empty) {
                                 super.updateItem(item, empty);
                                 if (empty) {
-                                    //System.out.println("pressed button......");
                                     setGraphic(null);
                                     setText(null);
                                 } else {
@@ -87,8 +86,6 @@ public class CancelledAppointmentsController {
                                             Appointment a = getTableView().getItems().get(getIndex());
                                             AppointmentService.removeCancelled(a);
                                             button.setDisable(true);
-
-                                        // System.out.println("pressed button");
                                     });
                                 }
                             }

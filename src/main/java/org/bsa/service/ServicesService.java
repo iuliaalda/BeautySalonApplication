@@ -1,6 +1,7 @@
 package org.bsa.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,7 +23,7 @@ import java.util.List;
 public class ServicesService {
     static List<Service> services;
     static String usr;
-    private static final Path S_PATH=FileSystemService.getPathToFile("config","services.json");
+    static final Path S_PATH=FileSystemService.getPathToFile("config","services.json");
     static File emp_file = new File("src\\main\\resources\\employees.json");
     static File wrfile = new File("src\\main\\resources\\services.json");
     public static void addServices(File serviceFile,File employeeFile) throws IOException{
@@ -49,6 +50,8 @@ public class ServicesService {
             FileUtils.copyURLToFile(Service.class.getClassLoader().getResource("services.json"), S_PATH.toFile());
         }
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+
         //File file = new File("src\\main\\resources\\services.json");
         services=objectMapper.readValue(serviceFile, new TypeReference<List<Service>>() {});
         //System.out.println(services);
@@ -60,13 +63,13 @@ public class ServicesService {
         return aux;
     }
     public static void addService(Service s,File serviceFile){
-        ObservableList<Service> service;
-        service=returnServ();
-        service.add(s);
+        /*ObservableList<Service> service;
+        service=returnServ();*/
+        services.add(s);
         try{
             ObjectMapper objectMapper = new ObjectMapper();
             //File file = new File("src\\main\\resources\\services.json");
-            objectMapper.writeValue(serviceFile,service);
+            objectMapper.writeValue(serviceFile,services);
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -90,18 +93,18 @@ public class ServicesService {
     }
     public static void removeServ(Service s,File serviceFile){
         ObservableList<Service> service;
-        service=returnServ();
-        service.removeIf(serv->serv.equals(s));
+        services=returnServ();
+        services.removeIf(serv->serv.equals(s));
         try{
             ObjectMapper objectMapper = new ObjectMapper();
             //File file = new File("src\\main\\resources\\services.json");
-            objectMapper.writeValue(serviceFile,service);
+            objectMapper.writeValue(serviceFile,services);
         }catch(IOException e){
             e.printStackTrace();
         }
     }
     public static void setUsr(String s){usr=s;}
-    public String getUsr(){return usr;}
+    public static String getUsr(){return usr;}
     public static ObservableList<Service> returnCertainServ(){
         ObservableList<Service> aux=FXCollections.observableArrayList();
         for(Service s:services)

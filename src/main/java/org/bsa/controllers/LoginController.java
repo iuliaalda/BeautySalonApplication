@@ -28,17 +28,17 @@ import static org.bsa.service.UserService.checkLoginCredentials;
 
 public class LoginController {
     @FXML
-    private Button loginButton;
+     Button loginButton;
     @FXML
-    private TextField usernameTextField;
+     TextField usernameTextField=new TextField();
     @FXML
-    private TextField passwordTextField;
+     TextField passwordTextField=new TextField();
     @FXML
-    private ChoiceBox userChoiceBox;
+     ChoiceBox userChoiceBox=new ChoiceBox();
     @FXML
-    private TextField text;
+     TextField text;
     @FXML
-    private Label warningLogin;
+     Label warningLogin;
     Stage stage;
     private String u;
     //private UserService U;

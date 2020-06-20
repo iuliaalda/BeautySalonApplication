@@ -46,7 +46,7 @@ public class EmployeeServicesListControllerTest {
     }
 
     @Test
-    public void handleAddAction() throws NumberFormatException, Exception{
+    public void handleAddAction() throws IllegalStateException, Exception{
         //ServicesService.setUsr("Iulia");
         ServicesService.loadServices(sfile);
         EmployeeService.loadEmployees(efile);
@@ -55,8 +55,8 @@ public class EmployeeServicesListControllerTest {
         FileUtils.copyURLToFile(Employee.class.getClassLoader().getResource("employees.json"),new File("src/test/resources/employees.json"));
         FileUtils.copyURLToFile(Employee.class.getClassLoader().getResource("services.json"),new File("src/test/resources/services.json"));
     }
-    @Test(expected = NumberFormatException.class)
-    public void handleAddActionTwo() throws NumberFormatException, Exception{
+    @Test(expected = IllegalStateException.class)
+    public void handleAddActionTwo() throws IllegalStateException, Exception{
         //ServicesService.setUsr("Iulia");
         ServicesService.loadServices(sfile);
         EmployeeService.loadEmployees(efile);

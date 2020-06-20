@@ -40,12 +40,11 @@ public class EmployeeServicesListController {
     @FXML
     private Button addBttn;
     @FXML
-    private TextField serviceAddText;
+    TextField serviceAddText;
     @FXML
-    private TextField priceAddText;
-    File writeFile=new File("src\\main\\resources\\employees.json");
-    File file = new File("src\\main\\resources\\employees.json");
-    File sfile = new File("src\\main\\resources\\services.json");
+    TextField priceAddText;
+    public File efile=new File("src\\main\\resources\\employees.json");
+    public File sfile = new File("src\\main\\resources\\services.json");
     public void handleAddAction(){
         Service service=new Service();
         ServicesService ss=new ServicesService();
@@ -56,7 +55,7 @@ public class EmployeeServicesListController {
                 service.setPrice(Float.parseFloat(priceAddText.getText()));
                 service.setEmpl(ss.getUsr());
                 //add to database
-                EmployeeService.writeServicetoEmployee(ss.getUsr(),service,writeFile,sfile);
+                EmployeeService.writeServicetoEmployee(ss.getUsr(),service,efile,sfile);
             }catch (NumberFormatException exception) {
                 Stage alert = new Stage();
                 alert.initModality(Modality.APPLICATION_MODAL);
@@ -96,7 +95,7 @@ public class EmployeeServicesListController {
     }
 
     public void initialize() throws IOException {
-        EmployeeService.loadEmployees(file);
+        EmployeeService.loadEmployees(efile);
         ServicesService.loadServices(sfile);
         initTable();
     }
@@ -150,7 +149,7 @@ public class EmployeeServicesListController {
                                             ename=s.getType();
                                         if(eprice==0.0)
                                             eprice=s.getPrice();
-                                        EmployeeService.updateServiceinEmployee(ss.getUsr(),s,ename,eprice,writeFile,sfile);
+                                        EmployeeService.updateServiceinEmployee(ss.getUsr(),s,ename,eprice,efile,sfile);
                                     });
                                     setGraphic(b);
                                     setText(null);
@@ -180,7 +179,7 @@ public class EmployeeServicesListController {
                                     b2.setOnAction(event -> {
                                         //deleting the row
                                         Service s=getTableView().getItems().get(getIndex());
-                                        EmployeeService.removeServicefromEmployee(ss.getUsr(),s,writeFile,sfile);
+                                        EmployeeService.removeServicefromEmployee(ss.getUsr(),s,efile,sfile);
                                     });
                                     setGraphic(b2);
                                     setText(null);

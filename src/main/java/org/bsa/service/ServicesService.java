@@ -100,7 +100,7 @@ public class ServicesService {
             e.printStackTrace();
         }
     }
-    public void setUsr(String s){usr=s;}
+    public static void setUsr(String s){usr=s;}
     public String getUsr(){return usr;}
     public static ObservableList<Service> returnCertainServ(){
         ObservableList<Service> aux=FXCollections.observableArrayList();

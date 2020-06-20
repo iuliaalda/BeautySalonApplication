@@ -64,15 +64,15 @@ public class EmployeeServiceTest {
         String name="testName";
         Service saux=new Service();
         Service stest =new Service("Bridal Makeup",60.0f,"Iulia");
-        ObservableList<Service> s=ServicesService.returnServ();
         EmployeeService.updateServiceinEmployee("Iulia",stest,name,stest.getPrice(),empfile,sfile);
+        ObservableList<Service> s=ServicesService.returnServ();
         for(Service aux:s){
             if(aux.getPrice()==stest.getPrice())
                 saux=aux;
         }
         assertEquals(saux.getType(),name);
-        FileUtils.copyURLToFile(Main.class.getClassLoader().getResource("employees.json"), empfile);
-        FileUtils.copyURLToFile(Main.class.getClassLoader().getResource("services.json"), sfile);
+        //FileUtils.copyURLToFile(Main.class.getClassLoader().getResource("employees.json"), empfile);
+        //FileUtils.copyURLToFile(Main.class.getClassLoader().getResource("services.json"), sfile);
     }
 
     @Test

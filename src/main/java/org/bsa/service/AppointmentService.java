@@ -29,7 +29,7 @@ import java.util.Date;
 import java.util.List;
 
 public class AppointmentService {
-    private static List<Appointment> appointments;
+    static List<Appointment> appointments;
     static String usr;
     static String clientusr;
     private static final Path A_PATH=FileSystemService.getPathToFile("config","appointments.json");
@@ -116,6 +116,7 @@ public class AppointmentService {
         return aux;
     }
 
+    /*not used
     public static ObservableList<Appointment> returnCertainAppointment(){
         ObservableList<Appointment> aux=FXCollections.observableArrayList();
         for(Appointment a:appointments)
@@ -125,7 +126,7 @@ public class AppointmentService {
             }
         }
         return aux;
-    }
+    }*/
     public  static ObservableList<Appointment> returnMyAppointments()
     {
         ObservableList<Appointment> aux=FXCollections.observableArrayList();
@@ -136,6 +137,7 @@ public class AppointmentService {
         }
         return  aux;
     }
+/*
     public static ObservableList<Appointment> returnCancelledAppointment(){
         ObservableList<Appointment> aux=FXCollections.observableArrayList();
         for(Appointment a:appointments)
@@ -145,7 +147,7 @@ public class AppointmentService {
             }
         }
         return aux;
-    }
+    }*/
     public static void setStatustoFalse(Appointment a,File afile){
         for(Appointment aux:appointments)
         {

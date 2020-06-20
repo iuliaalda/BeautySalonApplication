@@ -32,6 +32,7 @@ import sun.security.krb5.internal.APOptions;
 import javax.jws.HandlerChain;
 import javax.swing.*;
 import javax.swing.text.TabableView;
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -74,9 +75,10 @@ public class CustomerCartController {
     }
 
     static ObservableList<Service> selectedservices = FXCollections.observableArrayList();
+    File afile= new File("src\\main\\resources\\appointments.json");
     public void initialize() throws IOException {
 
-        AppointmentService.loadAppointments();
+        AppointmentService.loadAppointments(afile);
         initializeChoiceBox();
         CustomerServicesListController s = new CustomerServicesListController();
         ObservableList<Service> services = FXCollections.observableArrayList();
@@ -201,7 +203,7 @@ public class CustomerCartController {
                         finishTheAppointments.setOnAction(e->{
                             box.close();
                             try {
-                                AppointmentService.addAppointment(appointms);
+                                AppointmentService.addAppointment(appointms,afile);
                                 box.close();
                             } catch (EqualHour | IOException equalHour) {
                                 equalHour.printStackTrace();

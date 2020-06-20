@@ -59,12 +59,12 @@ public class AppointmentService {
         }catch (IOException e){e.printStackTrace();}
     }
 
-    public static void loadAppointments() throws IOException{
+    public static void loadAppointments(File afile) throws IOException{
         if(!Files.exists(A_PATH)){
             FileUtils.copyURLToFile(AppointmentService.class.getClassLoader().getResource("appointments.json"), A_PATH.toFile());
         }
         ObjectMapper objectMapper = new ObjectMapper();
-        appointments=objectMapper.readValue(new File("src\\main\\resources\\appointments.json"), new TypeReference<List<Appointment>>() {});
+        appointments=objectMapper.readValue(afile, new TypeReference<List<Appointment>>() {});
     }
 
 
@@ -146,7 +146,7 @@ public class AppointmentService {
         }
         return aux;
     }
-    public static void setStatustoFalse(Appointment a){
+    public static void setStatustoFalse(Appointment a,File afile){
         for(Appointment aux:appointments)
         {
             if(aux.equals(a)){
@@ -155,7 +155,7 @@ public class AppointmentService {
         }
         try{
             ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.writeValue(new File("src\\main\\resources\\appointments.json"),appointments);
+            objectMapper.writeValue(afile,appointments);
         }catch (IOException e){e.printStackTrace();}
     }
     public static String getUsr() {
@@ -172,20 +172,20 @@ public class AppointmentService {
     public static void setClientusr(String a) {
         clientusr = a;
     }
-    public static void removeCancelled(Appointment a)  {
+    public static void removeCancelled(Appointment a,File afile)  {
         // ObservableList<Appointment> appointments;
         appointments=returnAppointments();
         appointments.removeIf(app->app.equals(a));
         try{
             ObjectMapper objectMapper = new ObjectMapper();
-            File file = new File("src\\main\\resources\\appointments.json");
-            objectMapper.writeValue(file,appointments);
+            //File file = new File("src\\main\\resources\\appointments.json");
+            objectMapper.writeValue(afile,appointments);
         }catch(IOException e){
             e.printStackTrace();
         }
     }
 
-    public static void addAppointment(ArrayList<Appointment> appointms) throws EqualHour, IOException,NullPointerException {
+    public static void addAppointment(ArrayList<Appointment> appointms,File afile) throws EqualHour, IOException,NullPointerException {
         appointments=returnAppointments();
         //CustomerCartController c=git stanew CustomerCartController();
         //ObservableList<Appointment> ap=FXCollections.observableArrayList();
@@ -193,8 +193,8 @@ public class AppointmentService {
         appointments.addAll(appointms);
         try{
             ObjectMapper objectMapper = new ObjectMapper();
-            File file = new File("src\\main\\resources\\appointments.json");
-            objectMapper.writeValue(file,appointments);
+            //File file = new File("src\\main\\resources\\appointments.json");
+            objectMapper.writeValue(afile,appointments);
         }catch(IOException e){
             e.printStackTrace();
         }

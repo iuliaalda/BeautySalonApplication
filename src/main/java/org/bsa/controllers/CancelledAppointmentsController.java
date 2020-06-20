@@ -16,6 +16,7 @@ import org.bsa.model.Appointment;
 import org.bsa.service.AppointmentService;
 import org.bsa.service.ServicesService;
 
+import java.io.File;
 import java.io.IOException;
 
 
@@ -46,10 +47,11 @@ public class CancelledAppointmentsController {
     TableColumn service;
     @FXML
     TableColumn freeTime=new TableColumn<>("Free Time");;
-
+    File sfile = new File("src\\main\\resources\\services.json");
+    File afile= new File("src\\main\\resources\\appointments.json");
     public void initialize() throws IOException {
-        ServicesService.loadServices();
-        AppointmentService.loadAppointments();
+        ServicesService.loadServices(sfile);
+        AppointmentService.loadAppointments(afile);
         initTable();
     }
 
@@ -84,7 +86,7 @@ public class CancelledAppointmentsController {
                                     setGraphic(button);
                                     button.setOnAction((ActionEvent event) -> {
                                             Appointment a = getTableView().getItems().get(getIndex());
-                                            AppointmentService.removeCancelled(a);
+                                            AppointmentService.removeCancelled(a,afile);
                                             button.setDisable(true);
                                     });
                                 }

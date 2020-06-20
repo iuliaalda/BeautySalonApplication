@@ -19,6 +19,7 @@ import org.bsa.model.Appointment;
 import org.bsa.model.Service;
 import org.bsa.service.AppointmentService;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.management.BufferPoolMXBean;
 import java.text.SimpleDateFormat;
@@ -39,9 +40,9 @@ public class CustomerViewAppointmentsPage {
     TableColumn priceColumn;
     @FXML
     TableColumn cancelColumn;
-
+    File afile= new File("src\\main\\resources\\appointments.json");
     public void initialize() throws IOException {
-        AppointmentService.loadAppointments();
+        AppointmentService.loadAppointments(afile);
         initTable();
     }
     public void initTable(){
@@ -91,7 +92,7 @@ public class CustomerViewAppointmentsPage {
                                                 d1=Integer.parseInt(app_date[2]);
                                                 d2=Integer.parseInt(date[2]);
                                                 if(app_date[1].equals(date[1])&&(d1-d2>2)){
-                                                    AppointmentService.setStatustoFalse(a);
+                                                    AppointmentService.setStatustoFalse(a,afile);
                                                     b.setText("Cancelled");
                                                     b.setDisable(true);
                                                 }

@@ -45,8 +45,9 @@ public class CustomerStaffListController {
     TableColumn<Employee,String> yrsExp;
     @FXML
     Button backButton;
+    File file = new File("src\\main\\resources\\employees.json");
     public void initialize() throws IOException{
-        EmployeeService.loadEmployees();
+        EmployeeService.loadEmployees(file);
         fName.setCellValueFactory(new PropertyValueFactory<Employee,String>("firstName"));
         lName.setCellValueFactory(new PropertyValueFactory<Employee,String>("lastName"));
         age.setCellValueFactory(new PropertyValueFactory<Employee,String>("age"));

@@ -32,7 +32,7 @@ public class UserService {
         }
         ObjectMapper objectMapper = new ObjectMapper();
         //objectMapper.readerWithView(USERS_PATH.getClass());
-        users=objectMapper.readValue(new File("src\\main\\resources\\users.json"), new TypeReference<List<User>>() {});
+        users=objectMapper.readValue(USERS_PATH.toFile(), new TypeReference<List<User>>() {});
         //System.out.println("Read users"+users);
     }
 

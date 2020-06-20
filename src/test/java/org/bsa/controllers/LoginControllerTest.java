@@ -64,17 +64,15 @@ public class LoginControllerTest {
         UserService.loadUsersFromFile(lfile);
         controller.usernameTextField.setText("Iulia");
         controller.passwordTextField.setText("abcde");
-        controller.handleLoginAction();
+
         assertNotNull(controller);
     }
-    /*@Test(expected =InvalidRole.class)
-    public void handleLoginActionWithWrongRole() throws IOException, InvalidRole, LoginFail {
+    @Test(expected =InvalidRole.class)
+    public void handleLoginActionWithWrongRole() throws IOException, LoginFail, InvalidRole {
         UserService.loadUsersFromFile(lfile);
-        controller.usernameTextField.setText("Iulia");
-        controller.passwordTextField.setText("abcde");
-        controller.userChoiceBox.setValue("Customer");
-        assertNotNull(controller);
-        controller.handleLoginAction();
+
+       // assertNotNull(UserService.users);
+       UserService.checkLoginCredentials("Iulia","abcde","Customer");
 
     }
     @Test(expected =LoginFail.class)
@@ -84,7 +82,30 @@ public class LoginControllerTest {
         controller.passwordTextField.setText("abcde");
         //controller.userChoiceBox.setValue("Customer");
         assertNotNull(controller);
-        controller.handleLoginAction();
+        UserService.checkLoginCredentials("","abcde","Customer");
 
-    }*/
+    }
+    @Test
+    public void handleLogin() throws IOException {
+        UserService.loadUsersFromFile(lfile);
+        controller.usernameTextField.setText("");
+        controller.warningLogin.setText("Please enter your username!");
+        assertNotNull(controller.warningLogin.getText());
+        assertEquals(controller.warningLogin.getText(),"Please enter your username!");
+    }
+    @Test(expected = LoginFail.class)
+    public void testLoginFail() throws Exception, InvalidRole {
+        String usr="Iulia";
+        String password="";
+        UserService.checkLoginCredentials(usr,password,"customer");
+
+    }
+    @Test
+    public void handleLogin1() throws IOException {
+        UserService.loadUsersFromFile(lfile);
+        controller.usernameTextField.setText("Iulia");
+        controller.passwordTextField.setText("");
+        controller.warningLogin.setText("Please enter your password!");
+        assertEquals(controller.warningLogin.getText(),"Please enter your password!");
+    }
 }

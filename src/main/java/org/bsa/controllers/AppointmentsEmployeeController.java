@@ -22,6 +22,7 @@ import org.bsa.service.ServicesService;
 import sun.plugin2.jvm.RemoteJVMLauncher;
 
 import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.lang.ref.PhantomReference;
 
@@ -32,9 +33,11 @@ public class AppointmentsEmployeeController {
     TableColumn<Appointment,String> todayDate;
     @FXML
     TableColumn todayService;
+    File sfile = new File("src\\main\\resources\\services.json");
+    File afile= new File("src\\main\\resources\\appointments.json");
     public  void initialize() throws IOException {
-        ServicesService.loadServices();
-       AppointmentService.loadAppointments();
+        ServicesService.loadServices(sfile);
+       AppointmentService.loadAppointments(afile);
        initTable();
     }
 

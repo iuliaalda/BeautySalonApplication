@@ -23,9 +23,8 @@ import java.util.List;
 
 
 public class EmployeeService {
-    private static List<Employee> employees;
-    private static final Path EMP_PATH= FileSystemService.getPathToFile("config", "employees.json");
-
+    static List<Employee> employees;
+    public static Path EMP_PATH= FileSystemService.getPathToFile("config", "employees.json");
     public static void writeEmployees(){
         //adds employees with respective services to json file
         ArrayList<Employee> employee = new ArrayList<>();
@@ -45,61 +44,62 @@ public class EmployeeService {
             objectMapper.writeValue(new File("src\\main\\resources\\employees.json"),employee);
         }catch (IOException e){e.printStackTrace();}
     }
-    public static void writeServicetoEmployee(String username,Service s){
+    public static void writeServicetoEmployee(String username,Service s,File writeFile,File sfile){
         //adding service s to employee emp in json file
+
         ObservableList<Employee> e;
         e=returnEmp();
         for(Employee employee:e){
             if(employee.getUsername().equals(username))
             {
                 employee.addtoServiceList(s);
-                ServicesService.addService(s);
+                ServicesService.addService(s,sfile);
             }
         }
 
         try{
             ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.writeValue(new File("src\\main\\resources\\employees.json"),e);
+            objectMapper.writeValue(writeFile,e);
         }catch (IOException exception){exception.printStackTrace();}
 
     }
-    public static void updateServiceinEmployee(String username,Service s,String newname,float newprice){
+    public static void updateServiceinEmployee(String username,Service s,String newname,float newprice,File writeFile,File sfile){
         ObservableList<Employee> e;
         e=returnEmp();
         for(Employee employee:e){
             if(employee.getUsername().equals(username))
             {
                 employee.updateValue(s,newname,newprice);
-                ServicesService.updateServ(s,newname,newprice);
+                ServicesService.updateServ(s,newname,newprice,sfile);
             }
         }
         try{
             ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.writeValue(new File("src\\main\\resources\\employees.json"),e);
+            objectMapper.writeValue(writeFile,e);
         }catch (IOException exception){exception.printStackTrace();}
     }
-    public static void removeServicefromEmployee(String username, Service s){
+    public static void removeServicefromEmployee(String username, Service s,File writeFile,File sfile){
         ObservableList<Employee> e;
         e=returnEmp();
         for(Employee employee:e){
             if(employee.getUsername().equals(username))
             {
                 employee.removefromServiceList(s);
-                ServicesService.removeServ(s);
+                ServicesService.removeServ(s,sfile);
             }
         }
         try{
             ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.writeValue(new File("src\\main\\resources\\employees.json"),e);
+            objectMapper.writeValue(writeFile,e);
         }catch (IOException exception){exception.printStackTrace();}
     }
-    public static void loadEmployees()throws IOException{
+    public static void loadEmployees(File readFile)throws IOException{
         if(!Files.exists(EMP_PATH)){
             FileUtils.copyURLToFile(User.class.getClassLoader().getResource("employees.json"), EMP_PATH.toFile());
         }
         ObjectMapper objectMapper = new ObjectMapper();
-        File file = new File("src\\main\\resources\\employees.json");
-        employees=objectMapper.readValue(file, new TypeReference<List<Employee>>() {});
+
+        employees=objectMapper.readValue(readFile, new TypeReference<List<Employee>>() {});
     }
     public static ObservableList<Employee> returnEmp(){
         ObservableList<Employee> aux= FXCollections.observableArrayList();

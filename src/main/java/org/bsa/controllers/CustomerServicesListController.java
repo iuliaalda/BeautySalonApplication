@@ -27,6 +27,7 @@ import org.bsa.model.Service;
 import org.bsa.service.EmployeeService;
 import org.bsa.service.ServicesService;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -46,10 +47,11 @@ public class CustomerServicesListController {
     @FXML
     private Button doneButton;
    static ObservableList<Service> selected=FXCollections.observableArrayList();
-
+    File file = new File("src\\main\\resources\\employees.json");
+    File sfile = new File("src\\main\\resources\\services.json");
     public void initialize()throws IOException {
-        EmployeeService.loadEmployees();
-        ServicesService.loadServices();
+        EmployeeService.loadEmployees(file);
+        ServicesService.loadServices(sfile);
         initTable();
     }
     public void initTable(){

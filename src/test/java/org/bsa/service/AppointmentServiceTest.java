@@ -143,7 +143,7 @@ public class AppointmentServiceTest {
 
     @Test
     public void setClientusr() {
-        AppointmentService.setUsr("test_client");
+        AppointmentService.setClientusr("test_client");
         assertEquals("test_client",AppointmentService.getClientusr());
     }
 

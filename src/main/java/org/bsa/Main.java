@@ -19,10 +19,12 @@ import java.io.IOException;
 
 
 public class Main extends Application {
+    File usrfile = new File("src\\test\\resources\\users.json");
     @Override
     public void start(Stage primaryStage) throws Exception{
         copyData();
-        UserService.loadUsersFromFile();
+
+        UserService.loadUsersFromFile(usrfile);
         //AppointmentService.writeAppointment();
         /*EmployeeService.writeEmployees();
         ServicesService.addServices();*/

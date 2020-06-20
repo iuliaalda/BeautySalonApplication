@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServicesService {
-    private static List<Service> services;
+    static List<Service> services;
     static String usr;
     private static final Path S_PATH=FileSystemService.getPathToFile("config","services.json");
     static File emp_file = new File("src\\main\\resources\\employees.json");

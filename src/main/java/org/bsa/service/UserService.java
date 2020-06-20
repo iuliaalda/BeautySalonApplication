@@ -22,11 +22,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class UserService {
-    private static List<User> users;
+    static List<User> users;
     private static final Path USERS_PATH= FileSystemService.getPathToFile("config", "users.json");
+    static File wrfile = new File("src\\main\\resources\\users.json");
 
-
-    public static void loadUsersFromFile()throws IOException{
+    public static void loadUsersFromFile(File serviceFile)throws IOException{
         if(!Files.exists(USERS_PATH)){
             FileUtils.copyURLToFile(UserService.class.getClassLoader().getResource("users.json"), USERS_PATH.toFile());
         }

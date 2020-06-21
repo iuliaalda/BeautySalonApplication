@@ -33,16 +33,16 @@ import java.util.ArrayList;
 
 public class CustomerServicesListController {
     @FXML
-    private TableView<Service> custServTable;
+     TableView<Service> custServTable;
 
     @FXML
-    private TableColumn nameColumn;
+    TableColumn nameColumn;
 
     @FXML
-    private TableColumn checkboxColumn;
+    TableColumn checkboxColumn;
 
     @FXML
-    private TableColumn priceColumn;
+    TableColumn priceColumn;
 
     @FXML
     private Button doneButton;

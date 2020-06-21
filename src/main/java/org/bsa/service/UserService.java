@@ -36,7 +36,7 @@ public class UserService {
         //System.out.println("Read users"+users);
     }
 
-    private static void checkEmptyField(String username, String password) throws EmptyFieldException {
+    public static void checkEmptyField(String username, String password) throws EmptyFieldException {
         if(username.equals("") || password.equals("")) throw new EmptyFieldException();
     }
     public static void checkLoginCredentials(String username,String password, String role) throws LoginFail, InvalidRole {

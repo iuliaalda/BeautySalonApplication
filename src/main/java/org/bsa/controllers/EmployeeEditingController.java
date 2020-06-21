@@ -9,10 +9,10 @@ import org.bsa.model.Service;
 
 public class EmployeeEditingController {
     @FXML
-    private TextField priceField;
+    TextField priceField;
 
     @FXML
-    private TextField nameField;
+    TextField nameField;
 
     @FXML
     private Button confirmButton;

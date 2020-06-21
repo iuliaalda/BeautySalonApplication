@@ -91,7 +91,9 @@ public class CustomerViewAppointmentsPage {
                                                 int d1,d2;
                                                 d1=Integer.parseInt(app_date[2]);
                                                 d2=Integer.parseInt(date[2]);
-                                                if(app_date[1].equals(date[1])&&(d1-d2>2)){
+                                                System.out.println(d1);
+                                                System.out.println(d2);
+                                                if(app_date[1].equals(date[1])&&(d1-d2>2)||app_date[1]!=date[1]){
                                                     AppointmentService.setStatustoFalse(a,afile);
                                                     b.setText("Cancelled");
                                                     b.setDisable(true);

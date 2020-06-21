@@ -25,7 +25,7 @@ import java.io.IOException;
 
 import static org.junit.Assert.*;
 
-public class LoginControllerTest {
+public class LoginControllerTest extends ApplicationTest {
     File lfile = new File("src\\test\\resources\\users.json");
     public static final String TEST_USER = "testUser";
     public static final String TEST_PASSWORD = "testPassword";

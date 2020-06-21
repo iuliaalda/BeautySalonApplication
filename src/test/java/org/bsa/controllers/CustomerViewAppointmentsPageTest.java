@@ -20,7 +20,7 @@ import java.io.IOException;
 
 import static org.junit.Assert.*;
 
-public class CustomerViewAppointmentsPageTest {
+public class CustomerViewAppointmentsPageTest extends  ApplicationTest {
     File afile = new File("src\\test\\resources\\appointments.json");
     File sfile = new File("src\\test\\resources\\services.json");
     private CustomerViewAppointmentsPage controller;
@@ -31,7 +31,7 @@ public class CustomerViewAppointmentsPageTest {
         FileSystemService.initApplicationHomeDirIfNeeded();
         AppointmentService.setUsr("Iulia");
         AppointmentService.setClientusr("B");
-        //ApplicationTest.launch(Main.class);
+        ApplicationTest.launch(Main.class);
     }
     @Before
     public void setUp() throws Exception {
@@ -45,19 +45,25 @@ public class CustomerViewAppointmentsPageTest {
     }
     @Test
     public void initialize() throws IOException {
-        AppointmentService.loadAppointments(afile);
         ServicesService.loadServices(sfile);
-        //controller.dateColumn.setText("2020-06-26 11:00");
-        assertEquals(3,AppointmentService.returnMyAppointments().size());
-        assertNotNull(AppointmentService.returnMyAppointments());
+        assertNotNull(ServicesService.returnServ());
+        AppointmentService.loadAppointments(afile);
+        assertNotNull(AppointmentService.returnTodayApps());
+        CustomerServicesListController s=new CustomerServicesListController();
+        controller.initialize();
+        //assertEquals("[]",controller.appsTableView.getItems().toString());
+
+
     }
 
 
 
     @Test
     public void initTable() throws IOException {
+        ServicesService.loadServices(sfile);
         AppointmentService.loadAppointments(afile);
         AppointmentService.returnMyAppointments();
+        assertNotNull(ServicesService.returnServ());
         assertNotNull(AppointmentService.returnMyAppointments());
     }
 

@@ -24,14 +24,7 @@ import static org.junit.Assert.*;
 
 public class CustomerPageControllerTest extends ApplicationTest{
     private CustomerPageController controller;
-    @Override
-    public void start(Stage stage) throws Exception {
-        Scene listScene;
-        stage = (Stage) controller.welcomeCustomerLabel.getScene().getWindow();
-        Parent viewStaffListPageRoot = FXMLLoader.load(getClass().getResource("/customerStaffList.fxml"));
-        listScene= new Scene(viewStaffListPageRoot,600,380);
-        stage.setScene(listScene);
-    }
+    
     @BeforeClass
     public static void setupClass() throws Exception {
         FileSystemService.APPLICATION_FOLDER=".test-example";

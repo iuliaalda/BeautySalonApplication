@@ -19,7 +19,7 @@ import java.io.File;
 
 import static org.junit.Assert.*;
 
-public class EmployeeServicesListControllerTest {
+public class EmployeeServicesListControllerTest extends ApplicationTest{
     File sfile = new File("src\\test\\resources\\services.json");
     File efile = new File("src\\test\\resources\\employees.json");
     private EmployeeServicesListController controller;
@@ -34,7 +34,7 @@ public class EmployeeServicesListControllerTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws Exception  {
         FileUtils.cleanDirectory(FileSystemService.getApplicationHomePath().toFile());
         ServicesService.loadServices(sfile);
         FileUtils.copyURLToFile(Employee.class.getClassLoader().getResource("employees.json"),new File("src/test/resources/employees.json"));
@@ -54,7 +54,7 @@ public class EmployeeServicesListControllerTest {
     }
 
     @Test
-    public void handleAddAction() throws NumberFormatException, Exception{
+    public void handleAddAction() throws IllegalStateException, Exception{
         //ServicesService.setUsr("Iulia");
         ServicesService.loadServices(sfile);
         EmployeeService.loadEmployees(efile);

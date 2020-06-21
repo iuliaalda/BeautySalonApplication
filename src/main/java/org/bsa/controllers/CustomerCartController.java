@@ -178,6 +178,9 @@ public class CustomerCartController {
 
                     if (check==false)
                     { appointms.add(ap1);
+                        for(Service todelete:ap1.getServices()){
+                            CustomerServicesListController.selected.removeIf(a->a.equals(todelete));
+                        }
                         Stage box = new Stage();
                         box.initModality(Modality.APPLICATION_MODAL);
                         VBox alertscene = new VBox(30);
@@ -204,7 +207,7 @@ public class CustomerCartController {
                             box.close();
                             try {
                                 AppointmentService.addAppointment(appointms,afile);
-                                box.close();
+                                //box.close();
                             } catch (EqualHour | IOException equalHour) {
                                 equalHour.printStackTrace();
                             }

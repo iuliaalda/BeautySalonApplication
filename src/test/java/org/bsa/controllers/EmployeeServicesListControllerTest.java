@@ -1,9 +1,12 @@
 package org.bsa.controllers;
 
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import org.apache.commons.io.FileUtils;
 import org.bsa.Main;
 import org.bsa.model.Employee;
+import org.bsa.service.AppointmentService;
 import org.bsa.service.EmployeeService;
 import org.bsa.service.FileSystemService;
 import org.bsa.service.ServicesService;
@@ -41,6 +44,11 @@ public class EmployeeServicesListControllerTest {
         controller.priceAddText=new TextField();
         controller.serviceAddText.setText(SERVICE_ADD);
         controller.priceAddText.setText(String.valueOf(PRICE_ADD));
+        controller.employeeServices=new TableView<>();
+        controller.service=new TableColumn();
+        controller.price=new TableColumn();
+        controller.delete=new TableColumn();
+        controller.edit=new TableColumn();
         controller.sfile=sfile;
         controller.efile=efile;
     }
@@ -74,6 +82,24 @@ public class EmployeeServicesListControllerTest {
         ServicesService.loadServices(sfile);
         assertNotNull(EmployeeService.returnEmp());
         assertNotNull(ServicesService.returnServ());
+        controller.initialize();
+        assertNotNull(controller.employeeServices.getItems());
+    }
+
+    @Test
+    public void initCol() throws Exception{
+        ServicesService.loadServices(sfile);
+        assertNotNull(ServicesService.returnServ());
+        controller.initCol();
+        assertEquals(0,controller.employeeServices.getItems().size());
+    }
+
+    @Test
+    public void initTable() throws Exception{
+        ServicesService.loadServices(sfile);
+        assertNotNull(ServicesService.returnServ());
+        controller.initTable();
+        assertEquals("[Service{type='Simple Makeup', price=50.0, empl='Iulia'}, Service{type='Bridal Makeup', price=60.0, empl='Iulia'}]",controller.employeeServices.getItems().toString());
     }
 
     @Test

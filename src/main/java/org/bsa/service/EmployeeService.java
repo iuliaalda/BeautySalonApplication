@@ -25,7 +25,7 @@ import java.util.List;
 public class EmployeeService {
     static List<Employee> employees;
     public static Path EMP_PATH= FileSystemService.getPathToFile("config", "employees.json");
-    public static void writeEmployees(){
+    /*public static void writeEmployees(){
         //adds employees with respective services to json file
         ArrayList<Employee> employee = new ArrayList<>();
         ArrayList<Service> s1=new ArrayList<>();
@@ -43,7 +43,7 @@ public class EmployeeService {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.writeValue(new File("src\\main\\resources\\employees.json"),employee);
         }catch (IOException e){e.printStackTrace();}
-    }
+    }*/
     public static void writeServicetoEmployee(String username,Service s,File writeFile,File sfile){
         //adding service s to employee emp in json file
 

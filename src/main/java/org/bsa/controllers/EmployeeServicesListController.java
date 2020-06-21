@@ -28,17 +28,17 @@ import java.io.IOException;
 public class EmployeeServicesListController {
 
     @FXML
-    private TableView<Service> employeeServices;
+     TableView<Service> employeeServices;
     @FXML
-    private TableColumn edit;
+     TableColumn edit;
     @FXML
-    private TableColumn service;
+     TableColumn service;
     @FXML
-    private TableColumn price;
+     TableColumn price;
     @FXML
-    private TableColumn delete;
+     TableColumn delete;
     @FXML
-    private Button addBttn;
+     Button addBttn;
     @FXML
     TextField serviceAddText;
     @FXML
@@ -99,13 +99,13 @@ public class EmployeeServicesListController {
         ServicesService.loadServices(sfile);
         initTable();
     }
-    private void initTable(){
+    public void initTable(){
         initCol();
         ObservableList<Service> aux=FXCollections.observableArrayList();
         aux=ServicesService.returnCertainServ();
         employeeServices.setItems(aux);
     }
-    private void initCol(){
+    public void initCol(){
         ServicesService ss=new ServicesService();
         service.setCellValueFactory(new PropertyValueFactory<>("type"));
         price.setCellValueFactory(new PropertyValueFactory<>("price"));

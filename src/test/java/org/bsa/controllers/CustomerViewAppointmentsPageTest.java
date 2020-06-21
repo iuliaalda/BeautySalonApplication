@@ -1,5 +1,7 @@
 package org.bsa.controllers;
 
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import org.apache.commons.io.FileUtils;
 import org.bsa.Main;
@@ -41,6 +43,11 @@ public class CustomerViewAppointmentsPageTest extends  ApplicationTest {
         FileUtils.copyURLToFile(Employee.class.getClassLoader().getResource("employees.json"),new File("src/test/resources/employees.json"));
         FileUtils.copyURLToFile(Employee.class.getClassLoader().getResource("services.json"),new File("src/test/resources/services.json"));
         controller=new CustomerViewAppointmentsPage();
+        controller.appsTableView=new TableView();
+        controller.dateColumn=new TableColumn();
+        controller.priceColumn=new TableColumn();
+        controller.servicesColumn=new TableColumn();
+        controller.cancelColumn=new TableColumn();
 
     }
     @Test
@@ -48,10 +55,10 @@ public class CustomerViewAppointmentsPageTest extends  ApplicationTest {
         ServicesService.loadServices(sfile);
         assertNotNull(ServicesService.returnServ());
         AppointmentService.loadAppointments(afile);
-        assertNotNull(AppointmentService.returnTodayApps());
+        assertNotNull(AppointmentService.returnMyAppointments());
         CustomerServicesListController s=new CustomerServicesListController();
         controller.initialize();
-        //assertEquals("[]",controller.appsTableView.getItems().toString());
+        assertEquals("[Appointment{date='2020-06-25 15:00', empl='Bia', client='B', status=true, services=[Service{type='Long Hairstyle', price=55.0, empl='Bia'}], servicesList='Long Hairstyle; '}, Appointment{date='2020-06-12 15:00', empl='Iulia', client='B', status=true, services=[Service{type='Bridal Makeup', price=75.0, empl='Iulia'}, Service{type='Simple Makeup', price=20.0, empl='Iulia'}], servicesList='Bridal Makeup; Simple Makeup; '}, Appointment{date='2020-06-26 11:00', empl='Iulia', client='B', status=true, services=[Service{type='Bridal Makeup', price=60.0, empl='Iulia'}], servicesList='Bridal Makeup; '}]",controller.appsTableView.getItems().toString());
 
 
     }

@@ -1,5 +1,7 @@
 package org.bsa.controllers;
 
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.apache.commons.io.FileUtils;
@@ -39,10 +41,12 @@ public class AppointmentsEmployeeControllerTest extends ApplicationTest{
         FileUtils.copyURLToFile(Employee.class.getClassLoader().getResource("employees.json"),new File("src/test/resources/employees.json"));
         FileUtils.copyURLToFile(Employee.class.getClassLoader().getResource("services.json"),new File("src/test/resources/services.json"));
         FileUtils.copyURLToFile(Appointment.class.getClassLoader().getResource("appointments.json"),new File("src/test/resources/appointments.json"));
-        /*controller=new AppointmentsEmployeeController();
+        controller=new AppointmentsEmployeeController();
        controller.sfile=sfile;
        controller.afile=afile;
-       controller.TodayAppsTableView.setItems(AppointmentService.returnTodayApps());*/
+       controller.TodayAppsTableView=new TableView<>();
+       controller.todayDate=new TableColumn<>();
+       controller.todayService=new TableColumn();
     }
     @Test
     public void initialize() throws IOException {

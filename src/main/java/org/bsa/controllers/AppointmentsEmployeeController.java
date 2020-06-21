@@ -19,7 +19,6 @@ import org.bsa.model.Employee;
 import org.bsa.model.Service;
 import org.bsa.service.AppointmentService;
 import org.bsa.service.ServicesService;
-import sun.plugin2.jvm.RemoteJVMLauncher;
 
 import javax.swing.*;
 import java.io.File;

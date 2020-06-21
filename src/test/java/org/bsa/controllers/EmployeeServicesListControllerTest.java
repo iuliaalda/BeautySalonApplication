@@ -59,7 +59,7 @@ public class EmployeeServicesListControllerTest extends ApplicationTest{
         ServicesService.loadServices(sfile);
         EmployeeService.loadEmployees(efile);
         controller.handleAddAction();
-        assertEquals(3, ServicesService.returnServ().size());
+        assertEquals(4, ServicesService.returnServ().size());
         FileUtils.copyURLToFile(Employee.class.getClassLoader().getResource("employees.json"),new File("src/test/resources/employees.json"));
         FileUtils.copyURLToFile(Employee.class.getClassLoader().getResource("services.json"),new File("src/test/resources/services.json"));
     }
